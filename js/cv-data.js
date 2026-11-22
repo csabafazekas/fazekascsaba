@@ -40,15 +40,15 @@ window.CV_DATA = {
     summary: {
       en: [
         "I'm an educator from Fiľakovo, Slovakia, with more than {years} years of experience teaching informatics and English in primary and secondary schools. As a school digital coordinator, I introduced digital tools, managed school IT systems and trained teachers to use technology with confidence.",
-        "I bring together teaching, technology and leadership: I lead and motivate colleagues as they bring new methods and tools into the classroom. I work confidently in Hungarian, Slovak and English.",
+        "As a school principal, I bring together teaching, technology and leadership: I lead and motivate colleagues as they bring new methods and tools into the classroom. I work confidently in Hungarian, Slovak and English.",
       ],
       sk: [
         "Som pedagóg z Fiľakova a za sebou mám viac ako {years} rokov praxe vo vyučovaní informatiky a anglického jazyka na základnej aj strednej škole. Ako školský digitálny koordinátor mám skúsenosti so zavádzaním digitálnych nástrojov, správou školských IT systémov a so školením učiteľov.",
-        "Spájam pedagogiku, technológie a líderstvo: vediem a motivujem kolegov pri zavádzaní nových metód a nástrojov do výučby. S istotou pracujem po maďarsky, slovensky aj anglicky.",
+        "Ako riaditeľ školy spájam pedagogiku, technológie a líderstvo: vediem a motivujem kolegov pri zavádzaní nových metód a nástrojov do výučby. S istotou pracujem po maďarsky, slovensky aj anglicky.",
       ],
       hu: [
         "Füleki pedagógus vagyok, több mint {years} év tapasztalattal az informatika és az angol nyelv tanításában alap- és középiskolában. Iskolai digitális koordinátorként digitális eszközöket vezettem be, iskolai informatikai rendszereket kezeltem, és pedagógusokat képeztem.",
-        "A pedagógiát, a technológiát és a vezetést kapcsolom össze: vezetem és motiválom a kollégákat az új módszerek és eszközök bevezetésében. Magyarul, szlovákul és angolul is magabiztosan dolgozom.",
+        "Iskolaigazgatóként a pedagógiát, a technológiát és a vezetést kapcsolom össze: vezetem és motiválom a kollégákat az új módszerek és eszközök bevezetésében. Magyarul, szlovákul és angolul is magabiztosan dolgozom.",
       ],
     },
   },
