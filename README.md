@@ -1,50 +1,44 @@
-# Personal CV website
+# Csaba Fazekas · CV
 
-An interactive, single-page CV. It is plain HTML, CSS and JavaScript with no build step, so it works on GitHub Pages as is.
+Personal CV website: a single page in **English, Slovak and Hungarian**. It is plain HTML, CSS and JavaScript with no build step, hosted on GitHub Pages.
 
 **Live site:** https://csabafazekas.github.io/fazekascsaba/
+(direct links: [English](https://csabafazekas.github.io/fazekascsaba/?lang=en) · [Slovensky](https://csabafazekas.github.io/fazekascsaba/?lang=sk) · [Magyarul](https://csabafazekas.github.io/fazekascsaba/?lang=hu))
 
-## Features
+## What's on the page
 
-- **One data file.** Every bit of text lives in [`js/cv-data.js`](js/cv-data.js). Edit that file and the whole page updates.
-- **English / Hungarian toggle.** Text can be a plain string or `{ en, hu }`. The choice is remembered, and `?lang=hu` links straight to the Hungarian version.
-- **Light & dark theme.** Follows the system setting by default; the toggle remembers your choice.
-- **Skill highlighting.** Click any skill or tag to highlight every role and project that uses it, then jump to the matches.
-- **Experience timeline.** Durations are calculated automatically, and each role has expandable details.
-- **Projects.** Filter by category; click a card to open a detail dialog.
-- **Animated touches.** Typed role line, counters, skill meters and reveal-on-scroll. All of them switch off for visitors who prefer reduced motion.
-- **Download PDF.** The print stylesheet turns the page into a clean A4 CV (about two pages in English).
-- **Save contact.** Downloads a vCard (`.vcf`) generated from your details.
-- **Contact form.** Opens the visitor's email app with the message pre-filled; no backend needed.
-- Responsive (sticky section bar on phones), keyboard accessible, with a scroll-spy navigation.
+- **Highlights first:** name, role, a short summary, contact details and four key facts at the top.
+- **Career path:** a one-line view of the progression from teacher to principal, followed by each role with 2–3 key points.
+- **Key strengths, education & qualifications, languages, contact.**
+- **EN / SK / HU switch.** The page opens in the visitor's browser language, and `?lang=sk` / `?lang=hu` links open a specific language. Hungarian uses Hungarian name order and place names (Fazekas Csaba, Fülek).
+- **Light / dark theme**, sticky section menu, works on phones.
+- **Download CV (PDF):** prints a clean two-page A4 CV in the selected language.
+- **Save contact:** downloads a vCard; one click copies the email address.
 
-## Make it yours
+## Updating the content
 
-1. Open `js/cv-data.js` and replace the **sample content** (profile, experience, skills, projects, education, languages, etc.).
-2. Optional: add a photo, e.g. `assets/photo.jpg`, and set `profile.photo: "assets/photo.jpg"`.
-3. Set `meta.sampleContent: false` to remove the "sample content" banner.
-4. For an English-only page, set `meta.languages: ["en"]`.
-5. To change the accent colour, edit `--accent` (light theme) and its dark-theme twin in `css/style.css`.
+All text lives in [`js/cv-data.js`](js/cv-data.js). Each text is either a plain string or `{ en: "…", sk: "…", hu: "…" }`.
+
+- **New role:** add it to the top of `experience` (dates as `"YYYY-MM"`, `"present"` for the current one). The career path, durations and "years in education" update automatically.
+- **Photo:** add e.g. `assets/photo.jpg` and set `profile.photo: "assets/photo.jpg"`.
+- **Phone / LinkedIn:** fill in `profile.phone` or un-comment the LinkedIn line in `profile.socials`.
+- **Colours:** change `--accent` (and its dark-mode twin) in `css/style.css`.
+
+Every push to the publishing branch updates the live site within about a minute.
 
 ## Preview locally
 
 ```bash
 python3 -m http.server 8000
-# then open http://localhost:8000
+# open http://localhost:8000
 ```
-
-## Publish with GitHub Pages
-
-1. Push to GitHub.
-2. In the repository go to **Settings → Pages**, choose **Deploy from a branch**, pick your branch and the `/ (root)` folder.
-3. The site will be published at `https://<username>.github.io/<repository>/`.
-   To get the shorter `https://<username>.github.io/`, name the repository `<username>.github.io`.
 
 ## Files
 
 ```
 index.html        page shell
 css/style.css     styles, themes, responsive & print layout
-js/cv-data.js     ← your content
-js/app.js         rendering and interactions (no edits needed)
+js/cv-data.js     ← all CV content (EN / SK / HU)
+js/app.js         rendering and interactions
+404.html          "page not found" page for GitHub Pages
 ```

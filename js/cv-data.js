@@ -1,357 +1,290 @@
 /* ==========================================================================
-   CV DATA: edit this file to make the CV yours.
+   CV DATA: edit this file to update the CV.
    --------------------------------------------------------------------------
    • Every piece of text on the page comes from this file.
-   • Text can be a plain string ("Hello") or a translation object
-     ({ en: "Hello", hu: "Szia" }). Plain strings are used for every language.
-   • Dates are "YYYY-MM" or "YYYY". Use "present" for your current role.
-   • Skill filter: the `tags` on experience and projects are matched to skill
-     names (case-insensitive), so clicking "React" highlights everything
-     tagged "React". For translated skill names, match on the English name.
-   • The content below is SAMPLE content. Replace it with your own and set
-     `meta.sampleContent` to false to hide the reminder banner.
+   • Text can be a plain string (used for every language) or a translation
+     object: { en: "...", sk: "...", hu: "..." }.
+   • Dates are "YYYY-MM" or "YYYY". Use "present" for the current role.
+   • In summaries, {years} is replaced with your years in education,
+     calculated from the earliest role below.
    ========================================================================== */
 
 window.CV_DATA = {
   meta: {
-    languages: ["en", "hu"], // first entry is the fallback; remove "hu" for English only
-    defaultLang: "en",
-    sampleContent: true, // set to false once the content below is yours
+    languages: ["en", "sk", "hu"], // the order of the language switch
+    defaultLang: "en", // used when the visitor's browser language isn't listed
     lastUpdated: "2026-11",
   },
 
   profile: {
     firstName: "Csaba",
     lastName: "Fazekas",
-    photo: "", // e.g. "assets/photo.jpg"; leave empty to show your initials
-    title: { en: "Full-Stack Software Engineer", hu: "Full-stack szoftvermérnök" },
-    roles: {
-      en: ["Full-stack developer", "TypeScript enthusiast", "Cloud & DevOps tinkerer", "Problem solver"],
-      hu: ["Full-stack fejlesztő", "TypeScript-rajongó", "Felhő és DevOps megszállott", "Problémamegoldó"],
+    photo: "", // e.g. "assets/photo.jpg"; leave empty to show initials
+    title: { en: "Primary School Principal", sk: "Riaditeľ základnej školy", hu: "Alapiskolai igazgató" },
+    tagline: {
+      en: "Educator · School leader · Digital education",
+      sk: "Pedagóg · Vedenie školy · Digitálne vzdelávanie",
+      hu: "Pedagógus · Iskolavezető · Digitális oktatás",
     },
-    availability: { en: "Open to new opportunities", hu: "Nyitott vagyok új lehetőségekre" },
-    location: { en: "Budapest, Hungary", hu: "Budapest, Magyarország" },
-    email: "hello@example.com",
-    phone: "+36 30 123 4567",
-    website: "",
-    // type: github | linkedin | globe | mail | link
+    location: { en: "Fiľakovo, Slovakia", sk: "Fiľakovo, Slovensko", hu: "Fülek, Szlovákia" },
+    email: "fazekas.csaba@koharysuli.sk",
+    phone: "", // optional, e.g. "+421 900 000 000"
     socials: [
       { type: "github", label: "GitHub", url: "https://github.com/csabafazekas" },
-      { type: "linkedin", label: "LinkedIn", url: "https://www.linkedin.com/in/your-profile" },
+      // { type: "linkedin", label: "LinkedIn", url: "https://www.linkedin.com/in/..." },
     ],
-  },
-
-  about: {
     summary: {
       en: [
-        "I'm a software engineer who enjoys turning messy, real-world problems into simple, reliable products. Over the past years I've built web applications end to end, from database design and APIs to polished, accessible interfaces.",
-        "I care about clean code, fast feedback loops and teams where people learn from each other. Outside of work I contribute to open source, mentor junior developers and spend as much time outdoors as I can.",
+        "I'm an educator and school leader from Fiľakovo, Slovakia, with more than {years} years in primary and secondary education. I started as a teacher of English and informatics, helped my school go digital as its digital coordinator, and today I lead it as principal.",
+        "I bring together teaching, technology and people management, and I work confidently in Hungarian, Slovak and English.",
+      ],
+      sk: [
+        "Som pedagóg a riaditeľ základnej školy vo Fiľakove s viac ako {years} rokmi praxe v základnom a strednom školstve. Moja cesta viedla od učiteľa anglického jazyka a informatiky cez školského digitálneho koordinátora až k vedeniu školy.",
+        "Spájam pedagogiku, technológie a vedenie ľudí a s istotou pracujem po maďarsky, slovensky aj anglicky.",
       ],
       hu: [
-        "Szoftvermérnök vagyok, aki szereti a kusza, valós problémákat egyszerű és megbízható termékekké alakítani. Az elmúlt években teljes webalkalmazásokat építettem, az adatbázis-tervezéstől és az API-któl egészen az igényes, akadálymentes felületekig.",
-        "Fontos számomra a tiszta kód, a gyors visszajelzés és az olyan csapat, ahol egymástól tanulunk. Munkán kívül nyílt forráskódú projektekben veszek részt, junior fejlesztőket mentorálok, és amennyit csak lehet, a szabadban töltök.",
+        "Füleki pedagógus és iskolaigazgató vagyok, több mint {years} év tapasztalattal az alap- és középfokú oktatásban. Angol- és informatikatanárként kezdtem, digitális koordinátorként segítettem az iskola digitális átalakulását, ma pedig igazgatóként vezetem az intézményt.",
+        "A tanítást, a technológiát és az emberek vezetését kapcsolom össze, és magabiztosan dolgozom magyarul, szlovákul és angolul.",
       ],
     },
-    // auto: "years" | "skills" | "projects" | "languages" are calculated for you
-    stats: [
-      { auto: "years", suffix: "+", label: { en: "Years of experience", hu: "Év tapasztalat" } },
-      { value: 30, suffix: "+", label: { en: "Projects delivered", hu: "Átadott projekt" } },
-      { auto: "skills", label: { en: "Core technologies", hu: "Fő technológia" } },
-      { auto: "languages", label: { en: "Languages spoken", hu: "Beszélt nyelv" } },
-    ],
   },
 
+  // The four key facts under the summary. auto: "years" is calculated for you.
+  highlights: [
+    { auto: "years", suffix: "+", label: { en: "years in education", sk: "rokov v školstve", hu: "év az oktatásban" } },
+    {
+      value: { en: "Principal", sk: "Riaditeľ", hu: "Igazgató" },
+      label: { en: "since March 2025", sk: "od marca 2025", hu: "2025 márciusa óta" },
+    },
+    {
+      value: "3",
+      label: { en: "working languages (HU\u00a0·\u00a0SK\u00a0·\u00a0EN)", sk: "pracovné jazyky (HU\u00a0·\u00a0SK\u00a0·\u00a0EN)", hu: "munkanyelv (HU\u00a0·\u00a0SK\u00a0·\u00a0EN)" },
+    },
+    {
+      value: "Mgr.",
+      label: {
+        en: "Master's in teaching Informatics & English",
+        sk: "učiteľstvo informatiky a anglického jazyka",
+        hu: "informatika–angol szakos tanár",
+      },
+    },
+  ],
+
+  // Newest first. `short` is the label used in the career-path strip.
   experience: [
     {
-      role: { en: "Senior Software Engineer", hu: "Senior szoftvermérnök" },
-      company: "Northwind Digital",
-      url: "",
-      location: { en: "Budapest · Hybrid", hu: "Budapest · Hibrid" },
-      type: { en: "Full-time", hu: "Teljes munkaidő" },
-      start: "2022-03",
+      role: { en: "Principal", sk: "Riaditeľ základnej školy", hu: "Igazgató" },
+      short: { en: "Principal", sk: "Riaditeľ školy", hu: "Igazgató" },
+      org: { en: "Štefan Koháry II. Primary School", sk: "ZŠ Štefana Koháriho II. s VJM", hu: "II. Koháry István Alapiskola" },
+      location: { en: "Fiľakovo", sk: "Fiľakovo", hu: "Fülek" },
+      start: "2025-03",
       end: "present",
-      summary: {
-        en: "Leading development of a B2B analytics platform used by more than 200 companies.",
-        hu: "Egy több mint 200 vállalat által használt B2B analitikai platform fejlesztésének vezetése.",
-      },
       highlights: {
         en: [
-          "Led a team of five engineers in re-architecting the reporting engine, cutting average page load time by 60%.",
-          "Introduced end-to-end testing and preview deployments, reducing production incidents by 40%.",
-          "Designed a multi-tenant PostgreSQL schema and GraphQL API serving over 2 million requests a day.",
-          "Mentored four junior developers, two of whom were promoted within a year.",
+          "Lead the school's pedagogical, administrative and operational work, and its relationships with parents and the local community.",
+          "Manage the budget, financial planning and the effective use of staff and resources.",
+          "Develop the school education programme, introduce innovative teaching methods and lead teachers' professional development.",
+        ],
+        sk: [
+          "Riadenie pedagogickej, administratívnej a prevádzkovej činnosti školy a budovanie vzťahov s rodičmi a miestnou komunitou.",
+          "Správa rozpočtu, finančné plánovanie a efektívne využívanie ľudských a materiálnych zdrojov.",
+          "Rozvoj školského vzdelávacieho programu, zavádzanie inovatívnych metód výučby a vedenie profesijného rozvoja učiteľov.",
         ],
         hu: [
-          "Ötfős fejlesztőcsapatot vezettem a riportmotor újratervezésében, amivel 60%-kal csökkent az átlagos oldalbetöltési idő.",
-          "Bevezettem az end-to-end tesztelést és az előnézeti telepítéseket, így 40%-kal kevesebb éles hiba történt.",
-          "Megterveztem egy több bérlős PostgreSQL-sémát és GraphQL API-t, amely naponta több mint 2 millió kérést szolgál ki.",
-          "Négy junior fejlesztőt mentoráltam, közülük ketten egy éven belül előléptek.",
+          "Irányítom az iskola pedagógiai, adminisztratív és működési tevékenységét, és építem a kapcsolatot a szülőkkel és a helyi közösséggel.",
+          "Felelek a költségvetésért, a pénzügyi tervezésért, valamint az emberi és anyagi erőforrások hatékony felhasználásáért.",
+          "Fejlesztem az iskolai nevelési-oktatási programot, innovatív tanítási módszereket vezetek be, és irányítom a pedagógusok szakmai fejlődését.",
         ],
       },
-      tags: ["TypeScript", "React", "Next.js", "Node.js", "PostgreSQL", "REST & GraphQL", "AWS", "CI/CD", "System design", "Mentoring"],
     },
     {
-      role: { en: "Software Engineer", hu: "Szoftvermérnök" },
-      company: "Brightlane Software",
-      url: "",
-      location: "Budapest",
-      type: { en: "Full-time", hu: "Teljes munkaidő" },
-      start: "2019-06",
-      end: "2022-02",
-      summary: {
-        en: "Built customer-facing booking and payment features for a travel-tech SaaS product.",
-        hu: "Ügyfeleknek szóló foglalási és fizetési funkciókat fejlesztettem egy utazási SaaS termékhez.",
-      },
+      role: { en: "Deputy Principal", sk: "Zástupca riaditeľa školy", hu: "Igazgatóhelyettes" },
+      short: { en: "Deputy principal", sk: "Zástupca riaditeľa", hu: "Igazgatóhelyettes" },
+      org: { en: "Štefan Koháry II. Primary School", sk: "ZŠ Štefana Koháriho II. s VJM", hu: "II. Koháry István Alapiskola" },
+      location: { en: "Fiľakovo", sk: "Fiľakovo", hu: "Fülek" },
+      start: "2024-07",
+      end: "2025-02",
       highlights: {
         en: [
-          "Shipped a new React booking flow that raised conversion by 18%.",
-          "Built Python microservices for payments and invoicing, containerised with Docker.",
-          "Migrated legacy deployments to AWS with Terraform, halving infrastructure costs.",
+          "Coordinated the day-to-day running of the school, keeping lessons and activities running smoothly.",
+          "Supported and supervised the teaching staff and evaluated teaching performance.",
+          "Organised school events and projects; managed school documentation and internal rules.",
+        ],
+        sk: [
+          "Koordinácia každodenného chodu školy a zabezpečenie hladkého priebehu vyučovania a školských aktivít.",
+          "Podpora a supervízia pedagogického zboru, hodnotenie pedagogických výkonov.",
+          "Organizácia školských podujatí a projektov, správa školskej dokumentácie a vnútorných predpisov.",
         ],
         hu: [
-          "Új, React-alapú foglalási folyamatot szállítottam, amely 18%-kal növelte a konverziót.",
-          "Python mikroszolgáltatásokat építettem a fizetésekhez és a számlázáshoz, Dockerrel konténerizálva.",
-          "A régi telepítéseket Terraformmal AWS-re migráltam, ezzel megfeleztük az infrastruktúra költségeit.",
+          "Koordináltam az iskola mindennapi működését, és biztosítottam a tanítás és az iskolai programok zavartalan menetét.",
+          "Támogattam és felügyeltem a tantestület munkáját, értékeltem a pedagógiai teljesítményt.",
+          "Iskolai rendezvényeket és projekteket szerveztem, kezeltem az iskolai dokumentációt és a belső szabályzatokat.",
         ],
       },
-      tags: ["React", "TypeScript", "Python", "PostgreSQL", "Docker", "AWS", "Terraform", "Testing", "Agile / Scrum"],
     },
     {
-      role: { en: "Junior Web Developer", hu: "Junior webfejlesztő" },
-      company: "Pixelcraft Studio",
-      url: "",
-      location: "Debrecen",
-      type: { en: "Full-time", hu: "Teljes munkaidő" },
-      start: "2017-09",
-      end: "2019-05",
-      summary: {
-        en: "Developed websites and web apps for agency clients in retail, hospitality and education.",
-        hu: "Weboldalakat és webalkalmazásokat fejlesztettem ügynökségi ügyfeleknek a kiskereskedelem, a vendéglátás és az oktatás területén.",
-      },
+      role: { en: "School Digital Coordinator", sk: "Školský digitálny koordinátor", hu: "Iskolai digitális koordinátor" },
+      short: { en: "Digital coordinator", sk: "Digitálny koordinátor", hu: "Digitális koordinátor" },
+      org: { en: "Štefan Koháry II. Primary School", sk: "ZŠ Štefana Koháriho II. s VJM", hu: "II. Koháry István Alapiskola" },
+      location: { en: "Fiľakovo", sk: "Fiľakovo", hu: "Fülek" },
+      start: "2021-09",
+      end: "2024-08",
       highlights: {
         en: [
-          "Delivered 15+ responsive websites with a focus on performance and accessibility.",
-          "Built a reusable component library that cut new-project setup from days to hours.",
-          "Worked directly with clients to gather requirements and present solutions.",
+          "Introduced and managed digital tools for teaching and school administration.",
+          "Trained and supported teachers and pupils in using digital technology.",
+          "Coordinated and maintained the school network, e-learning platforms and other IT systems.",
+        ],
+        sk: [
+          "Zavádzanie a správa digitálnych nástrojov pre výučbu a administratívu školy.",
+          "Školenia a technická podpora učiteľov a žiakov pri využívaní digitálnych technológií.",
+          "Koordinácia a údržba školskej počítačovej siete, e-learningových platforiem a ďalších IT riešení.",
         ],
         hu: [
-          "Több mint 15 reszponzív weboldalt adtam át, kiemelt figyelmet fordítva a teljesítményre és az akadálymentességre.",
-          "Újrahasznosítható komponenskönyvtárat építettem, amellyel napokról órákra csökkent az új projektek előkészítése.",
-          "Közvetlenül az ügyfelekkel dolgoztam az igények felmérésén és a megoldások bemutatásán.",
+          "Digitális eszközöket vezettem be és kezeltem a tanításhoz és az iskolai adminisztrációhoz.",
+          "Képzéseket tartottam, és technikai segítséget nyújtottam a pedagógusoknak és a diákoknak a digitális technológiák használatában.",
+          "Koordináltam és karbantartottam az iskolai hálózatot, az e-learning platformokat és más informatikai rendszereket.",
         ],
       },
-      tags: ["CSS & Tailwind", "React", "TypeScript", "Node.js", "Agile / Scrum"],
+    },
+    {
+      role: { en: "Informatics Teacher (secondary)", sk: "Učiteľ informatiky na SŠ", hu: "Középiskolai informatikatanár" },
+      short: { en: "Informatics teacher, grammar school", sk: "Učiteľ informatiky na gymnáziu", hu: "Informatikatanár (gimnázium)" },
+      org: { en: "Fiľakovo Grammar School", sk: "Gymnázium – Gimnázium Fiľakovo", hu: "Füleki Gimnázium" },
+      location: { en: "Fiľakovo", sk: "Fiľakovo", hu: "Fülek" },
+      start: "2015-02",
+      end: "2024-08",
+      highlights: {
+        en: [
+          "Taught informatics, including programming, algorithms and computer systems.",
+          "Prepared curricula, tests and online learning materials, and gave students individual support.",
+        ],
+        sk: [
+          "Vyučovanie informatiky vrátane programovania, algoritmov a práce s počítačovými systémami.",
+          "Príprava učebných plánov, testov a online materiálov, individuálna podpora študentov.",
+        ],
+        hu: [
+          "Informatikát tanítottam, beleértve a programozást, az algoritmusokat és a számítógépes rendszereket.",
+          "Tanterveket, teszteket és online tananyagokat készítettem, és egyénileg támogattam a diákokat.",
+        ],
+      },
+    },
+    {
+      role: { en: "Teacher of English and Informatics", sk: "Učiteľ anglického jazyka a informatiky", hu: "Angol- és informatikatanár" },
+      short: { en: "English & informatics teacher", sk: "Učiteľ ANJ a informatiky", hu: "Angol- és informatikatanár" },
+      org: { en: "Štefan Koháry II. Primary School", sk: "ZŠ Štefana Koháriho II. s VJM", hu: "II. Koháry István Alapiskola" },
+      location: { en: "Fiľakovo", sk: "Fiľakovo", hu: "Fülek" },
+      start: "2012-09",
+      end: "2024-06",
+      highlights: {
+        en: [
+          "Taught English at different proficiency levels and developed pupils' digital skills, including programming.",
+          "Created learning materials, assessed pupils and supported their progress; took part in school projects.",
+        ],
+        sk: [
+          "Výučba anglického jazyka na rôznych úrovniach a rozvoj digitálnych zručností žiakov vrátane programovania.",
+          "Tvorba učebných materiálov, hodnotenie žiakov a podpora ich napredovania, účasť na školských projektoch.",
+        ],
+        hu: [
+          "Angol nyelvet tanítottam különböző szinteken, és fejlesztettem a diákok digitális készségeit, a programozást is beleértve.",
+          "Tananyagokat készítettem, értékeltem a diákokat és támogattam a fejlődésüket, részt vettem iskolai projektekben.",
+        ],
+      },
     },
   ],
 
-  // level: 1 Beginner · 2 Elementary · 3 Intermediate · 4 Advanced · 5 Expert
-  skills: [
+  // icon: leader | digital | teaching
+  strengths: [
     {
-      category: "Frontend",
-      items: [
-        { name: "TypeScript", level: 5 },
-        { name: "React", level: 5 },
-        { name: "Next.js", level: 4 },
-        { name: "CSS & Tailwind", level: 4 },
-      ],
+      icon: "leader",
+      title: { en: "School leadership", sk: "Vedenie školy", hu: "Iskolavezetés" },
+      items: {
+        en: ["Strategic and day-to-day school management", "Budget and resource planning", "Staff leadership and professional development", "Parent and community relations", "School documentation and internal rules"],
+        sk: ["Strategické a každodenné riadenie školy", "Plánovanie rozpočtu a zdrojov", "Vedenie a profesijný rozvoj zamestnancov", "Spolupráca s rodičmi a komunitou", "Školská dokumentácia a vnútorné predpisy"],
+        hu: ["Stratégiai és napi iskolairányítás", "Költségvetés- és erőforrás-tervezés", "A tantestület vezetése és szakmai fejlesztése", "Kapcsolattartás a szülőkkel és a közösséggel", "Iskolai dokumentáció és belső szabályzatok"],
+      },
     },
     {
-      category: "Backend",
-      items: [
-        { name: "Node.js", level: 5 },
-        { name: "Python", level: 4 },
-        { name: "PostgreSQL", level: 4 },
-        { name: "REST & GraphQL", level: 4 },
-      ],
+      icon: "digital",
+      title: { en: "Digital education", sk: "Digitálne vzdelávanie", hu: "Digitális oktatás" },
+      items: {
+        en: ["Digital transformation of schools", "E-learning platforms", "School IT systems and networks (CCNA)", "Digital-skills training for teachers"],
+        sk: ["Digitálna transformácia školy", "E-learningové platformy", "Školské IT systémy a siete (CCNA)", "Školenia digitálnych zručností pre učiteľov"],
+        hu: ["Az iskola digitális átalakítása", "E-learning platformok", "Iskolai informatikai rendszerek és hálózatok (CCNA)", "Digitáliskészség-képzés pedagógusoknak"],
+      },
     },
     {
-      category: { en: "Cloud & DevOps", hu: "Felhő és DevOps" },
-      items: [
-        { name: "Docker", level: 4 },
-        { name: "CI/CD", level: 4 },
-        { name: "AWS", level: 3 },
-        { name: "Terraform", level: 3 },
-      ],
-    },
-    {
-      category: { en: "Ways of working", hu: "Munkamódszerek" },
-      items: [
-        { name: { en: "Testing", hu: "Tesztelés" }, level: 4 },
-        { name: { en: "System design", hu: "Rendszertervezés" }, level: 4 },
-        { name: "Agile / Scrum", level: 4 },
-        { name: { en: "Mentoring", hu: "Mentorálás" }, level: 4 },
-      ],
-    },
-  ],
-
-  projectCategories: [
-    { id: "web", label: { en: "Web apps", hu: "Webalkalmazások" } },
-    { id: "backend", label: { en: "APIs & backend", hu: "API-k és backend" } },
-    { id: "devops", label: "DevOps" },
-    { id: "oss", label: { en: "Open source", hu: "Nyílt forráskód" } },
-  ],
-
-  projects: [
-    {
-      title: { en: "Realtime analytics dashboard", hu: "Valós idejű analitikai irányítópult" },
-      category: "web",
-      year: 2025,
-      description: {
-        en: "Interactive dashboard that streams business KPIs to operations teams with sub-second updates.",
-        hu: "Interaktív irányítópult, amely másodperc alatti frissítéssel juttatja el az üzleti mutatókat az operatív csapatokhoz.",
+      icon: "teaching",
+      title: { en: "Teaching", sk: "Pedagogika", hu: "Pedagógia" },
+      items: {
+        en: ["English language teaching", "Informatics, programming and algorithms", "Curriculum and learning-material design", "Assessment and individual feedback"],
+        sk: ["Výučba anglického jazyka", "Informatika, programovanie a algoritmy", "Tvorba vzdelávacích programov a materiálov", "Hodnotenie a individuálna spätná väzba"],
+        hu: ["Angolnyelv-oktatás", "Informatika, programozás és algoritmusok", "Tanterv- és tananyagfejlesztés", "Értékelés és egyéni visszajelzés"],
       },
-      details: {
-        en: "Operations teams needed to react to changes within minutes, not days. Events stream in over WebSockets, are aggregated in PostgreSQL and rendered as thousands of smoothly updating data points in the browser.",
-        hu: "Az operatív csapatoknak percek, nem napok alatt kellett reagálniuk a változásokra. Az események WebSocketen érkeznek, PostgreSQL-ben aggregálódnak, majd több ezer, folyamatosan frissülő adatpontként jelennek meg a böngészőben.",
-      },
-      highlights: {
-        en: ["Processes 5,000 events per second with sub-second latency", "Drag-and-drop widgets and saved layouts", "Role-based access control and audit logging"],
-        hu: ["Másodpercenként 5000 eseményt dolgoz fel, másodperc alatti késleltetéssel", "Húzd-és-ejtsd widgetek és menthető elrendezések", "Szerepköralapú jogosultságkezelés és naplózás"],
-      },
-      tags: ["TypeScript", "React", "Node.js", "PostgreSQL"],
-      links: { demo: "", source: "" },
-    },
-    {
-      title: { en: "Booking platform API", hu: "Foglalási platform API" },
-      category: "backend",
-      year: 2023,
-      description: {
-        en: "Scalable REST and GraphQL API powering bookings, payments and invoicing for a travel product.",
-        hu: "Skálázható REST és GraphQL API, amely egy utazási termék foglalásait, fizetéseit és számlázását szolgálja ki.",
-      },
-      details: {
-        en: "Designed as a set of small Python services behind a single gateway, with a strong focus on correctness: idempotent payment flows, contract tests between services and zero-downtime database migrations.",
-        hu: "Kis Python-szolgáltatások egyetlen gateway mögött, a helyességre fókuszálva: idempotens fizetési folyamatok, szerződéstesztek a szolgáltatások között és leállás nélküli adatbázis-migrációk.",
-      },
-      highlights: {
-        en: ["99.95% uptime over two years", "Contract tests catch breaking changes before release", "Automated invoicing in three currencies"],
-        hu: ["99,95%-os rendelkezésre állás két év alatt", "A szerződéstesztek még kiadás előtt jelzik a kompatibilitástörő változásokat", "Automatikus számlázás három pénznemben"],
-      },
-      tags: ["Python", "PostgreSQL", "Docker", "REST & GraphQL", "Testing"],
-      links: { demo: "", source: "" },
-    },
-    {
-      title: { en: "Infrastructure starter kit", hu: "Infrastruktúra-kezdőcsomag" },
-      category: "devops",
-      year: 2024,
-      description: {
-        en: "Reusable Terraform modules and CI/CD pipelines that launch a production-ready AWS environment in under an hour.",
-        hu: "Újrahasznosítható Terraform-modulok és CI/CD folyamatok, amelyekkel egy óra alatt elindítható egy éles üzemre kész AWS-környezet.",
-      },
-      details: {
-        en: "Born from setting up the same infrastructure over and over. The kit bundles networking, container hosting, databases, monitoring and secure defaults, so every new project starts from a solid baseline.",
-        hu: "Abból született, hogy újra és újra ugyanazt az infrastruktúrát kellett felépíteni. A csomag tartalmazza a hálózatot, a konténerfuttatást, az adatbázisokat, a monitorozást és a biztonságos alapbeállításokat, így minden új projekt stabil alapról indul.",
-      },
-      highlights: {
-        en: ["Used to bootstrap 12 internal projects", "Security best practices enabled by default", "Preview environment for every pull request"],
-        hu: ["12 belső projekt indult vele", "Alapértelmezetten bekapcsolt biztonsági ajánlások", "Előnézeti környezet minden pull requesthez"],
-      },
-      tags: ["Terraform", "AWS", "CI/CD", "Docker"],
-      links: { demo: "", source: "" },
-    },
-    {
-      title: "devflow CLI",
-      category: "oss",
-      year: 2024,
-      description: {
-        en: "Open-source command-line tool that automates repetitive Git and release chores for developers.",
-        hu: "Nyílt forráskódú parancssori eszköz, amely automatizálja a fejlesztők ismétlődő Git- és kiadási feladatait.",
-      },
-      details: {
-        en: "A small side project that grew a community: devflow scaffolds branches, writes changelogs from commit history and publishes releases with a single command.",
-        hu: "Egy kis hobbiprojekt, amely köré közösség épült: a devflow egyetlen paranccsal létrehozza az ágakat, a commitokból changelogot ír, és kiadást publikál.",
-      },
-      highlights: {
-        en: ["1,200+ stars on GitHub", "30+ contributors from around the world", "95% test coverage"],
-        hu: ["Több mint 1200 csillag a GitHubon", "Több mint 30 közreműködő a világ minden tájáról", "95%-os tesztlefedettség"],
-      },
-      tags: ["Node.js", "TypeScript", "CI/CD", "Testing"],
-      links: { demo: "", source: "https://github.com/csabafazekas" },
-    },
-    {
-      title: { en: "Personal finance tracker", hu: "Személyes pénzügyi nyilvántartó" },
-      category: "web",
-      year: 2022,
-      description: {
-        en: "A privacy-friendly budgeting app with smart categorisation and monthly insights.",
-        hu: "Adatvédelmet tisztelő költségvetés-tervező alkalmazás okos kategorizálással és havi kimutatásokkal.",
-      },
-      details: {
-        en: "Built to scratch my own itch. Transactions are imported from bank exports, categorised automatically and summarised in clear monthly reports.",
-        hu: "Saját igényre készült. A tranzakciók banki exportból töltődnek be, automatikusan kategorizálódnak, és áttekinthető havi riportokban jelennek meg.",
-      },
-      highlights: {
-        en: ["Server-rendered with Next.js for fast first loads", "Accessible, keyboard-friendly interface", "Works offline as a progressive web app"],
-        hu: ["Next.js szerveroldali renderelés a gyors betöltésért", "Akadálymentes, billentyűzettel is kényelmes felület", "Progresszív webalkalmazásként offline is működik"],
-      },
-      tags: ["Next.js", "TypeScript", "CSS & Tailwind", "PostgreSQL"],
-      links: { demo: "", source: "" },
-    },
-    {
-      title: { en: "UI component library", hu: "UI-komponenskönyvtár" },
-      category: "oss",
-      year: 2019,
-      description: {
-        en: "Accessible React component library with design tokens, used across a dozen client projects.",
-        hu: "Akadálymentes React-komponenskönyvtár design tokenekkel, egy tucat ügyfélprojektben használva.",
-      },
-      details: {
-        en: "Started at the agency to stop rebuilding the same buttons and forms. Every component is documented, themeable and tested for keyboard and screen-reader support.",
-        hu: "Az ügynökségnél indult, hogy ne kelljen mindig újraépíteni ugyanazokat a gombokat és űrlapokat. Minden komponens dokumentált, témázható, és billentyűzetes, illetve képernyőolvasós használatra is tesztelt.",
-      },
-      highlights: {
-        en: ["40+ documented components", "WCAG 2.1 AA compliant", "Themeable through design tokens"],
-        hu: ["Több mint 40 dokumentált komponens", "WCAG 2.1 AA megfelelőség", "Design tokenekkel témázható"],
-      },
-      tags: ["React", "TypeScript", "CSS & Tailwind", "Testing"],
-      links: { demo: "", source: "" },
     },
   ],
 
   education: [
     {
-      degree: { en: "MSc in Computer Science", hu: "Mérnökinformatikus MSc" },
-      school: { en: "University of Technology", hu: "Műszaki Egyetem" },
-      start: "2015",
-      end: "2017",
-      details: {
-        en: "Thesis on distributed caching strategies for web applications.",
-        hu: "Diplomamunka: elosztott gyorsítótárazási stratégiák webalkalmazásokhoz.",
+      title: {
+        en: "Master's degree (Mgr.), Teaching Informatics and English",
+        sk: "Magisterské štúdium (Mgr.), učiteľstvo informatiky a anglického jazyka",
+        hu: "Mesterképzés (Mgr.), informatika–angol tanári szak",
       },
+      org: { en: "Constantine the Philosopher University in Nitra", sk: "Univerzita Konštantína Filozofa v Nitre", hu: "Nyitrai Konstantin Filozófus Egyetem" },
+      start: "2010",
+      end: "2012",
     },
     {
-      degree: { en: "BSc in Computer Science", hu: "Programtervező informatikus BSc" },
-      school: { en: "University of Technology", hu: "Műszaki Egyetem" },
-      start: "2012",
-      end: "2015",
-      details: {
-        en: "Specialised in software engineering and databases.",
-        hu: "Szoftverfejlesztés és adatbázisok szakirány.",
+      title: {
+        en: "Bachelor's degree (Bc.), Teaching Informatics and English",
+        sk: "Bakalárske štúdium (Bc.), učiteľstvo informatiky a anglického jazyka",
+        hu: "Alapképzés (Bc.), informatika–angol tanári szak",
       },
+      org: { en: "Constantine the Philosopher University in Nitra", sk: "Univerzita Konštantína Filozofa v Nitre", hu: "Nyitrai Konstantin Filozófus Egyetem" },
+      start: "2007",
+      end: "2010",
     },
   ],
 
-  certifications: [
-    { name: "AWS Certified Developer – Associate", issuer: "Amazon Web Services", year: "2023", url: "" },
-    { name: "Professional Scrum Master I", issuer: "Scrum.org", year: "2021", url: "" },
-    { name: { en: "Advanced React Patterns", hu: "Haladó React-minták" }, issuer: { en: "Online course", hu: "Online kurzus" }, year: "2020", url: "" },
+  qualifications: [
+    {
+      title: { en: "Second attestation for teaching staff", sk: "Druhá atestácia pedagogického zamestnanca", hu: "Második pedagógus-atesztáció" },
+      org: { en: "NIVAM, National Institute for Education and Youth", sk: "NIVAM, Národný inštitút vzdelávania a mládeže", hu: "NIVAM, Nemzeti Oktatási és Ifjúsági Intézet" },
+      year: "2025",
+    },
+    {
+      title: {
+        en: "Transforming education and schools for the digital age",
+        sk: "Transformácia vzdelávania a školy pre digitálnu dobu",
+        hu: "Az oktatás és az iskola átalakítása a digitális korban",
+      },
+      org: { en: "Pavol Jozef Šafárik University in Košice", sk: "Univerzita Pavla Jozefa Šafárika v Košiciach", hu: "Kassai Pavol Jozef Šafárik Egyetem" },
+      year: "2021",
+    },
+    {
+      title: { en: "First attestation for teaching staff", sk: "Prvá atestácia pedagogického zamestnanca", hu: "Első pedagógus-atesztáció" },
+      org: { en: "NIVAM, National Institute for Education and Youth", sk: "NIVAM, Národný inštitút vzdelávania a mládeže", hu: "NIVAM, Nemzeti Oktatási és Ifjúsági Intézet" },
+      year: "2019",
+    },
+    {
+      title: "Cisco Certified Network Associate (CCNA)",
+      org: { en: "Fiľakovo Grammar School", sk: "Gymnázium Fiľakovo", hu: "Füleki Gimnázium" },
+      year: "2006",
+    },
   ],
 
   languages: [
-    { name: { en: "Hungarian", hu: "Magyar" }, level: { en: "Native", hu: "Anyanyelv" }, percent: 100 },
-    { name: { en: "English", hu: "Angol" }, level: { en: "Professional (C1)", hu: "Tárgyalóképes (C1)" }, percent: 85 },
-    { name: { en: "German", hu: "Német" }, level: { en: "Intermediate (B1)", hu: "Középfok (B1)" }, percent: 50 },
+    { name: { en: "Hungarian", sk: "Maďarčina", hu: "Magyar" }, level: { en: "Native", sk: "Materinský jazyk", hu: "Anyanyelv" }, percent: 100 },
+    { name: { en: "Slovak", sk: "Slovenčina", hu: "Szlovák" }, level: { en: "C1 · Proficient", sk: "C1 · Skúsený používateľ", hu: "C1 · Felsőfok" }, percent: 88 },
+    { name: { en: "English", sk: "Angličtina", hu: "Angol" }, level: { en: "C1 · Proficient", sk: "C1 · Skúsený používateľ", hu: "C1 · Felsőfok" }, percent: 88 },
   ],
-
-  interests: {
-    en: ["Open source", "Hiking", "Photography", "Chess", "Cooking", "Cycling"],
-    hu: ["Nyílt forráskód", "Túrázás", "Fotózás", "Sakk", "Főzés", "Kerékpározás"],
-  },
 
   contact: {
     text: {
-      en: "Have a role, a project or just an idea in mind? I'd love to hear about it. Email is the quickest way to reach me.",
-      hu: "Van egy állásajánlatod, projekted vagy csak egy ötleted? Szívesen meghallgatom. E-mailben érsz el a leggyorsabban.",
+      en: "Interested in working together or want to know more? Email is the best way to reach me.",
+      sk: "Máte záujem o spoluprácu alebo viac informácií? Najlepšie ma zastihnete e-mailom.",
+      hu: "Együttműködésről vagy további részletekről érdeklődne? E-mailben érhet el a legkönnyebben.",
     },
   },
 };
