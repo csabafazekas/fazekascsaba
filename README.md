@@ -12,7 +12,6 @@ Personal CV website: a single page in **English, Slovak and Hungarian**. It is p
 - **Key strengths, education & qualifications, languages, contact.**
 - **EN / SK / HU switch.** The page opens in the visitor's browser language, and `?lang=sk` / `?lang=hu` links open a specific language. Hungarian uses Hungarian name order and place names (Fazekas Csaba, Fülek).
 - **Light / dark theme**, sticky section menu, works on phones.
-- **Download CV (PDF):** prints a clean two-page A4 CV in the selected language.
 - **Save contact:** downloads a vCard; one click copies the email address.
 
 ## Updating the content

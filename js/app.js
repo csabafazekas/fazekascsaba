@@ -33,13 +33,11 @@
       current: "Current",
       duration: (y, m) => [y && `${y} yr${y > 1 ? "s" : ""}`, m && `${m} mo${m > 1 ? "s" : ""}`].filter(Boolean).join(" "),
       emailMe: "Email me",
-      downloadPdf: "Download CV (PDF)",
       saveContact: "Save contact",
       copyEmail: "Copy email address",
       copied: "Email address copied",
       copyFailed: "Couldn't copy. Please copy it manually.",
       toggleTheme: "Switch light / dark theme",
-      print: "Print or save as PDF",
       language: "Language",
       backToTop: "Back to top",
       lastUpdated: "Last updated",
@@ -65,13 +63,11 @@
       duration: (y, m) =>
         [y && `${y} ${skPlural(y, "rok", "roky", "rokov")}`, m && `${m} ${skPlural(m, "mesiac", "mesiace", "mesiacov")}`].filter(Boolean).join(" "),
       emailMe: "Napíšte mi",
-      downloadPdf: "Stiahnuť CV (PDF)",
       saveContact: "Uložiť kontakt",
       copyEmail: "Kopírovať e-mailovú adresu",
       copied: "E-mailová adresa skopírovaná",
       copyFailed: "Kopírovanie zlyhalo. Skopírujte adresu ručne.",
       toggleTheme: "Prepnúť svetlý / tmavý režim",
-      print: "Tlačiť alebo uložiť ako PDF",
       language: "Jazyk",
       backToTop: "Späť hore",
       lastUpdated: "Posledná aktualizácia",
@@ -96,13 +92,11 @@
       current: "Jelenlegi",
       duration: (y, m) => [y && `${y} év`, m && `${m} hónap`].filter(Boolean).join(" "),
       emailMe: "Írjon nekem",
-      downloadPdf: "Önéletrajz letöltése (PDF)",
       saveContact: "Névjegy mentése",
       copyEmail: "E-mail-cím másolása",
       copied: "E-mail-cím a vágólapra másolva",
       copyFailed: "A másolás nem sikerült, kérem, másolja ki kézzel.",
       toggleTheme: "Világos / sötét mód",
-      print: "Nyomtatás vagy mentés PDF-ként",
       language: "Nyelv",
       backToTop: "Vissza az elejére",
       lastUpdated: "Utoljára frissítve",
@@ -118,7 +112,6 @@
     pin: '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
     sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>',
     moon: '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>',
-    download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/>',
     copy: '<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
     check: '<path d="M20 6 9 17l-5-5"/>',
     arrowUp: '<path d="m5 12 7-7 7 7"/><path d="M12 19V5"/>',
@@ -243,7 +236,6 @@
           ? `<div class="seg" role="group" aria-label="${esc(S("language"))}">${LANGS.map((l) => `<button type="button" data-lang="${l}" lang="${l}" title="${esc(UI[l].langName)}" aria-label="${esc(UI[l].langName)}" aria-pressed="${l === state.lang}">${l.toUpperCase()}</button>`).join("")}</div>`
           : ""}
         <button type="button" class="icon-btn" data-action="theme" aria-label="${esc(S("toggleTheme"))}" title="${esc(S("toggleTheme"))}">${icon("moon", "i-moon")}${icon("sun", "i-sun")}</button>
-        <button type="button" class="btn btn-primary btn-sm" data-action="print" aria-label="${esc(S("downloadPdf"))}" title="${esc(S("downloadPdf"))}">${icon("download")}<span class="btn-sm-label">PDF</span></button>
       </div>`;
   }
 
@@ -274,7 +266,6 @@
       ${meta ? `<ul class="meta">${meta}</ul>` : ""}
       <div class="hero-actions">
         ${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}">${icon("send")}<span>${esc(S("emailMe"))}</span></a>` : ""}
-        <button type="button" class="btn btn-ghost" data-action="print">${icon("download")}<span>${esc(S("downloadPdf"))}</span></button>
       </div>
       ${facts ? `<ul class="facts">${facts}</ul>` : ""}
     </section>`;
@@ -363,7 +354,6 @@
         ${p.phone ? `<p class="contact-phone">${icon("phone")}<a href="${esc(telHref(p.phone))}">${esc(p.phone)}</a></p>` : ""}
         <div class="contact-actions">
           <a class="btn btn-primary" href="mailto:${esc(p.email)}">${icon("send")}<span>${esc(S("emailMe"))}</span></a>
-          <button type="button" class="btn btn-ghost" data-action="print">${icon("download")}<span>${esc(S("downloadPdf"))}</span></button>
           <button type="button" class="btn btn-ghost" data-action="vcard">${icon("userPlus")}<span>${esc(S("saveContact"))}</span></button>
         </div>
       </div>
@@ -558,7 +548,6 @@
     if (el.dataset.lang) return setLang(el.dataset.lang);
     switch (el.dataset.action) {
       case "theme": return toggleTheme();
-      case "print": return window.print();
       case "vcard": return downloadVCard();
       case "copy-email": return copyEmail(el);
       case "top":
