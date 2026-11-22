@@ -19,15 +19,16 @@
       langName: "English",
       nav: { about: "About", experience: "Experience", skills: "Strengths", education: "Education", contact: "Contact" },
       headings: {
-        experience: "Experience",
+        experience: "From the classroom to school leadership",
         path: "Career path",
-        skills: "Key strengths",
-        education: "Education & qualifications",
-        degrees: "Degrees",
-        qualifications: "Qualifications & training",
+        pathHint: "Select a step to see the details",
+        skills: "Where leadership, technology and teaching meet",
+        skillsHint: "Hover over or select an area",
+        education: "Always learning",
         languages: "Languages",
-        contact: "Get in touch",
+        contact: "Let's talk",
       },
+      kinds: { degree: "Degree", qual: "Qualification" },
       fullName: (first, last) => `${first} ${last}`,
       present: "Present",
       current: "Current",
@@ -48,15 +49,16 @@
       langName: "Slovenčina",
       nav: { about: "O mne", experience: "Skúsenosti", skills: "Silné stránky", education: "Vzdelanie", contact: "Kontakt" },
       headings: {
-        experience: "Pracovné skúsenosti",
+        experience: "Od katedry k vedeniu školy",
         path: "Kariérna cesta",
-        skills: "Kľúčové silné stránky",
-        education: "Vzdelanie a kvalifikácia",
-        degrees: "Vysokoškolské vzdelanie",
-        qualifications: "Kvalifikácia a ďalšie vzdelávanie",
+        pathHint: "Kliknite na krok a zobrazí sa detail",
+        skills: "Kde sa stretáva vedenie, technológie a pedagogika",
+        skillsHint: "Prejdite myšou alebo kliknite na oblasť",
+        education: "Neustále sa vzdelávam",
         languages: "Jazykové znalosti",
         contact: "Spojme sa",
       },
+      kinds: { degree: "Štúdium", qual: "Kvalifikácia" },
       fullName: (first, last) => `${first} ${last}`,
       present: "súčasnosť",
       current: "Aktuálne",
@@ -78,15 +80,16 @@
       langName: "Magyar",
       nav: { about: "Rólam", experience: "Tapasztalat", skills: "Erősségek", education: "Végzettség", contact: "Kapcsolat" },
       headings: {
-        experience: "Szakmai tapasztalat",
+        experience: "A katedrától az iskolavezetésig",
         path: "Szakmai út",
-        skills: "Fő erősségek",
-        education: "Végzettség és képesítések",
-        degrees: "Felsőfokú végzettség",
-        qualifications: "Képesítések és továbbképzések",
+        pathHint: "Kattintson egy lépésre a részletekért",
+        skills: "Ahol a vezetés, a technológia és a pedagógia találkozik",
+        skillsHint: "Vigye az egeret egy területre, vagy kattintson rá",
+        education: "Folyamatosan tanulok",
         languages: "Nyelvtudás",
-        contact: "Vegye fel velem a kapcsolatot",
+        contact: "Beszéljünk",
       },
+      kinds: { degree: "Diploma", qual: "Képesítés" },
       fullName: (first, last) => `${last} ${first}`,
       present: "jelenleg",
       current: "Jelenlegi",
@@ -115,10 +118,13 @@
     copy: '<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
     check: '<path d="M20 6 9 17l-5-5"/>',
     arrowUp: '<path d="m5 12 7-7 7 7"/><path d="M12 19V5"/>',
+    arrowDown: '<path d="M12 5v14"/><path d="m19 12-7 7-7-7"/>',
     userPlus: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/>',
     send: '<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',
     award: '<circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/>',
     cap: '<path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>',
+    clock: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+    star: '<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>',
     languages: '<path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/>',
     leader: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
     digital: '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>',
@@ -141,7 +147,7 @@
 
   const LANGS = ((DATA.meta && DATA.meta.languages) || ["en"]).filter((l) => UI[l]);
   const DEFAULT_LANG = LANGS.includes(DATA.meta && DATA.meta.defaultLang) ? DATA.meta.defaultLang : LANGS[0];
-  const state = { lang: initialLang() };
+  const state = { lang: initialLang(), pinnedSet: null };
   let firstRender = true;
   let currentNav = null;
 
@@ -167,6 +173,7 @@
     return first == null ? "" : first;
   }
   const S = (key) => ((UI[state.lang] || UI.en)[key] !== undefined ? (UI[state.lang] || UI.en)[key] : UI.en[key]);
+  const H = (key) => S("headings")[key];
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const toArray = (v) => (Array.isArray(v) ? v : v ? [v] : []);
   const clamp = (n, lo, hi) => Math.min(hi, Math.max(lo, n));
@@ -217,8 +224,13 @@
   ];
   const activeSections = () => SECTIONS.filter(([, has]) => has()).map(([id]) => id);
 
-  const copyBtn = () =>
-    `<button type="button" class="copy-btn" data-action="copy-email" aria-label="${esc(S("copyEmail"))}" title="${esc(S("copyEmail"))}">${icon("copy", "i-copy")}${icon("check", "i-check")}</button>`;
+  const copyBtn = (cls = "") =>
+    `<button type="button" class="copy-btn ${cls}" data-action="copy-email" aria-label="${esc(S("copyEmail"))}" title="${esc(S("copyEmail"))}">${icon("copy", "i-copy")}${icon("check", "i-check")}</button>`;
+
+  const sectionHead = (id, n) => `<header class="section-head">
+      <p class="eyebrow"><span class="eyebrow-num">${String(n).padStart(2, "0")}</span>${esc(S("nav")[id])}</p>
+      <h2 id="${id}-title" class="section-title">${esc(H(id))}</h2>
+    </header>`;
 
   function renderTopbar() {
     const nav = activeSections()
@@ -239,6 +251,7 @@
       </div>`;
   }
 
+  /* ----------------------------------------------------------------- hero */
   function renderAbout() {
     const p = DATA.profile;
     const name = fullName();
@@ -247,114 +260,160 @@
       p.email && `<li>${icon("mail")}<a href="mailto:${esc(p.email)}">${esc(p.email)}</a>${copyBtn()}</li>`,
       p.phone && `<li>${icon("phone")}<a href="${esc(telHref(p.phone))}">${esc(p.phone)}</a></li>`,
       p.location && `<li>${icon("pin")}<span>${esc(t(p.location))}</span></li>`,
-      ...(p.socials || []).map((s) => `<li class="meta-social">${icon(s.type)}<a href="${esc(s.url)}" ${ext}>${esc(prettyUrl(s.url))}</a></li>`),
+      ...(p.socials || []).map((s) => `<li>${icon(s.type)}<a href="${esc(s.url)}" ${ext}>${esc(prettyUrl(s.url))}</a></li>`),
     ].filter(Boolean).join("");
-    const facts = (DATA.highlights || []).map((h) => {
+    const chips = (DATA.highlights || []).slice(0, 4).map((h, i) => {
       const value = h.auto === "years" ? `${yearsInField()}${h.suffix || ""}` : `${t(h.value)}${h.suffix || ""}`;
-      return `<li class="fact reveal"><p class="fact-value">${esc(value)}</p><p class="fact-label">${esc(t(h.label))}</p></li>`;
+      return `<li class="float-chip fc-${i + 1}">
+        <span class="fc-icon">${icon(h.icon || "star")}</span>
+        <span class="fc-text"><span class="fc-value">${esc(value)}</span><span class="fc-label">${esc(t(h.label))}</span></span>
+      </li>`;
     }).join("");
     return `<section id="about" class="hero" aria-labelledby="about-title">
-      <div class="hero-head">
-        <div class="avatar">${p.photo ? `<img src="${esc(p.photo)}" alt="${esc(name)}">` : `<span aria-hidden="true">${esc(initials())}</span>`}</div>
-        <div class="hero-id">
+      <div class="hero-grid">
+        <div class="hero-copy">
           ${p.tagline ? `<p class="tagline">${esc(t(p.tagline))}</p>` : ""}
           <h1 id="about-title" class="name">${esc(name)}</h1>
-          <p class="role-title">${esc(t(p.title))}</p>
+          <p class="role-title"><span class="marker">${esc(t(p.title))}</span></p>
+          ${summary.length ? `<div class="summary">${summary.map((s) => `<p>${esc(fill(s))}</p>`).join("")}</div>` : ""}
+          ${meta ? `<ul class="meta">${meta}</ul>` : ""}
+          ${p.email ? `<div class="hero-actions"><a class="btn btn-primary" href="mailto:${esc(p.email)}">${icon("send")}<span>${esc(S("emailMe"))}</span></a></div>` : ""}
+        </div>
+        <div class="hero-visual">
+          <div class="portrait">
+            <span class="portrait-grid" aria-hidden="true"></span>
+            ${p.photo ? `<img src="${esc(p.photo)}" alt="${esc(name)}">` : `<span class="portrait-initials" aria-hidden="true">${esc(initials())}</span>`}
+          </div>
+          ${chips ? `<ul class="float-chips">${chips}</ul>` : ""}
         </div>
       </div>
-      ${summary.length ? `<div class="summary">${summary.map((s) => `<p>${esc(fill(s))}</p>`).join("")}</div>` : ""}
-      ${meta ? `<ul class="meta">${meta}</ul>` : ""}
-      <div class="hero-actions">
-        ${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}">${icon("send")}<span>${esc(S("emailMe"))}</span></a>` : ""}
-      </div>
-      ${facts ? `<ul class="facts">${facts}</ul>` : ""}
+      <a class="scroll-cue" href="#experience" aria-label="${esc(S("nav").experience)}">${icon("arrowDown")}</a>
     </section>`;
   }
 
-  function renderExperience() {
+  /* ----------------------------------------------------------- experience */
+  function renderExperience(n) {
     const items = DATA.experience || [];
-    const steps = items
-      .slice()
-      .sort((a, b) => String(a.start).localeCompare(String(b.start)))
-      .map((x) => `<li class="step${x.end === "present" ? " is-current" : ""}">
-        <span class="step-year">${esc(String(x.start).slice(0, 4))}</span>
-        <span class="step-dot" aria-hidden="true"></span>
-        <span class="step-role">${esc(t(x.short || x.role))}</span>
-      </li>`)
-      .join("");
-    const roles = items.map((x) => {
+    const ordered = items.map((x, i) => ({ x, i })).sort((a, b) => String(a.x.start).localeCompare(String(b.x.start)));
+    const count = ordered.length;
+    const stairs = ordered.map(({ x, i }, k) => {
+      const h = count > 1 ? Math.round(34 + (k * 66) / (count - 1)) : 100;
+      const w = count > 1 ? Math.round(52 + (k * 48) / (count - 1)) : 100;
+      const mix = count > 1 ? Math.round(6 + (k * 22) / Math.max(1, count - 2)) : 20;
+      return `<li class="stair${x.end === "present" ? " is-current" : ""}" style="--h:${h}%;--w:${w}%;--k:${k};--mix:${Math.min(mix, 28)}%">
+        <button type="button" class="stair-btn" data-action="goto-role" data-index="${i}">
+          <span class="stair-year">${esc(String(x.start).slice(0, 4))}</span>
+          <span class="stair-role">${esc(t(x.short || x.role))}</span>
+        </button>
+      </li>`;
+    }).join("");
+
+    const roles = items.map((x, i) => {
       const months = monthsBetween(x.start, x.end);
       const bullets = toArray(t(x.highlights));
       const isCurrent = x.end === "present";
-      return `<li class="role reveal">
+      return `<li class="role reveal${isCurrent ? " is-current" : ""}" id="role-${i}">
         <div class="role-when">
           <p class="role-dates">${range(x.start, x.end)}</p>
           <p class="role-dur">${esc(S("duration")(Math.floor(months / 12), months % 12))}</p>
         </div>
         <div class="role-body">
-          <h3 class="role-name">${esc(t(x.role))}${isCurrent ? ` <span class="badge">${esc(S("current"))}</span>` : ""}</h3>
+          <h3 class="role-name">${esc(t(x.role))}${isCurrent ? ` <span class="badge"><span class="badge-dot" aria-hidden="true"></span>${esc(S("current"))}</span>` : ""}</h3>
           <p class="role-org">${esc(t(x.org))}${x.location ? `<span class="sep" aria-hidden="true">·</span>${esc(t(x.location))}` : ""}</p>
           ${bullets.length ? `<ul class="bullets">${bullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>` : ""}
         </div>
       </li>`;
     }).join("");
+
     return `<section id="experience" class="section" aria-labelledby="experience-title">
-      <h2 id="experience-title" class="section-title">${esc(S("headings").experience)}</h2>
-      ${items.length > 1 ? `<div class="path reveal" aria-label="${esc(S("headings").path)}">
-        <p class="path-label">${esc(S("headings").path)}</p>
-        <ol class="steps" style="--n:${items.length}">${steps}</ol>
+      ${sectionHead("experience", n)}
+      ${count > 1 ? `<div class="stairs-wrap reveal">
+        <div class="stairs-head"><p class="mini-label">${esc(H("path"))}</p><p class="hint">${esc(H("pathHint"))}</p></div>
+        <ol class="stairs" aria-label="${esc(H("path"))}">${stairs}</ol>
       </div>` : ""}
       <ol class="roles">${roles}</ol>
     </section>`;
   }
 
-  function renderStrengths() {
-    const cards = (DATA.strengths || []).map((g) => `<div class="card strength reveal">
-      <h3 class="card-title"><span class="card-icon">${icon(g.icon)}</span><span>${esc(t(g.title))}</span></h3>
-      <ul class="checklist">${toArray(t(g.items)).map((i) => `<li>${icon("check")}<span>${esc(i)}</span></li>`).join("")}</ul>
-    </div>`).join("");
+  /* ------------------------------------------------------------ strengths */
+  const VENN = [
+    { cx: 120, cy: 120, lx: 76, ly: 104 },
+    { cx: 220, cy: 120, lx: 264, ly: 104 },
+    { cx: 170, cy: 205, lx: 170, ly: 266 },
+  ];
+  function renderStrengths(n) {
+    const groups = (DATA.strengths || []).slice(0, 3);
+    const venn = groups.length === 3
+      ? `<div class="venn reveal">
+          <svg viewBox="0 0 340 320" role="group" aria-label="${esc(H("skills"))}">
+            ${groups.map((g, i) => `<g class="venn-set set-${i + 1}" data-set="${i}" data-action="pin-set" tabindex="0" role="button" aria-pressed="false" aria-label="${esc(t(g.title))}">
+              <circle cx="${VENN[i].cx}" cy="${VENN[i].cy}" r="100"/>
+              <text x="${VENN[i].lx}" y="${VENN[i].ly}" text-anchor="middle">${esc(t(g.short || g.title))}</text>
+            </g>`).join("")}
+            <text class="venn-center" x="170" y="156" text-anchor="middle">${esc(DATA.profile.firstName)}</text>
+          </svg>
+          <p class="hint">${esc(H("skillsHint"))}</p>
+        </div>`
+      : "";
+    const lists = groups.map((g, i) => `<div class="sgroup set-${i + 1} reveal" data-set="${i}" data-action="pin-set">
+        <h3 class="sgroup-title"><span class="sgroup-icon">${icon(g.icon)}</span><span>${esc(t(g.title))}</span></h3>
+        <ul class="chips">${toArray(t(g.items)).map((it) => `<li>${esc(it)}</li>`).join("")}</ul>
+      </div>`).join("");
     return `<section id="skills" class="section" aria-labelledby="skills-title">
-      <h2 id="skills-title" class="section-title">${esc(S("headings").skills)}</h2>
-      <div class="strengths">${cards}</div>
+      ${sectionHead("skills", n)}
+      <div class="strengths-wrap${venn ? "" : " no-venn"}">${venn}<div class="sgroups">${lists}</div></div>
     </section>`;
   }
 
-  function renderEducation() {
-    const H = S("headings");
-    const list = (items) => items.map((e) => `<li>
-      <p class="edu-year">${e.year ? esc(e.year) : range(e.start, e.end)}</p>
-      <p class="edu-title">${esc(t(e.title))}</p>
-      <p class="edu-org">${esc(t(e.org))}</p>
-    </li>`).join("");
-    const edu = DATA.education || [], quals = DATA.qualifications || [], langs = DATA.languages || [];
+  /* ------------------------------------------------------------ education */
+  function renderEducation(n) {
+    const K = S("kinds");
+    const items = [
+      ...(DATA.education || []).map((e) => ({ ...e, kind: "degree", sort: String(e.end || e.start) })),
+      ...(DATA.qualifications || []).map((e) => ({ ...e, kind: "qual", sort: String(e.year) })),
+    ].sort((a, b) => a.sort.localeCompare(b.sort));
+    const path = items.map((e) => `<li class="lp-item ${e.kind}">
+        <span class="lp-node" aria-hidden="true">${icon(e.kind === "degree" ? "cap" : "award")}</span>
+        <div class="lp-text">
+          <p class="lp-year">${e.year ? esc(e.year) : range(e.start, e.end)}<span class="lp-kind">${esc(K[e.kind])}</span></p>
+          <p class="lp-title">${esc(t(e.title))}</p>
+          <p class="lp-org">${esc(t(e.org))}</p>
+        </div>
+      </li>`).join("");
+    const langs = DATA.languages || [];
+    const rings = langs.map((l) => {
+      const pct = clamp(Number(l.percent) || 0, 0, 100);
+      return `<li class="ring-item">
+        <div class="ring" aria-hidden="true">
+          <svg viewBox="0 0 120 120"><circle class="ring-track" cx="60" cy="60" r="50"/><circle class="ring-fill" cx="60" cy="60" r="50" pathLength="100" style="--p:${pct}"/></svg>
+          <span class="ring-code">${esc(l.code || t(l.name).slice(0, 2).toUpperCase())}</span>
+        </div>
+        <p class="ring-name">${esc(t(l.name))}</p>
+        <p class="ring-level">${esc(t(l.level))}</p>
+      </li>`;
+    }).join("");
     return `<section id="education" class="section" aria-labelledby="education-title">
-      <h2 id="education-title" class="section-title">${esc(H.education)}</h2>
-      <div class="edu-grid">
-        ${edu.length ? `<div class="card edu-card reveal"><h3 class="card-title"><span class="card-icon">${icon("cap")}</span><span>${esc(H.degrees)}</span></h3><ul class="edu-list">${list(edu)}</ul></div>` : ""}
-        ${quals.length ? `<div class="card edu-card reveal"><h3 class="card-title"><span class="card-icon">${icon("award")}</span><span>${esc(H.qualifications)}</span></h3><ul class="edu-list">${list(quals)}</ul></div>` : ""}
-      </div>
-      ${langs.length ? `<div class="card langs reveal">
-        <h3 class="card-title"><span class="card-icon">${icon("languages")}</span><span>${esc(H.languages)}</span></h3>
-        <ul class="lang-list">${langs.map((l) => `<li>
-          <div class="lang-top"><span class="lang-name">${esc(t(l.name))}</span><span class="lang-level">${esc(t(l.level))}</span></div>
-          <div class="bar" aria-hidden="true"><span style="--w:${clamp(Number(l.percent) || 0, 0, 100)}%"></span></div>
-        </li>`).join("")}</ul>
-      </div>` : ""}
+      ${sectionHead("education", n)}
+      ${path ? `<ol class="lpath reveal" style="--n:${items.length}">${path}</ol>` : ""}
+      ${rings ? `<div class="langs reveal"><p class="mini-label">${esc(H("languages"))}</p><ul class="rings">${rings}</ul></div>` : ""}
     </section>`;
   }
 
-  function renderContact() {
+  /* -------------------------------------------------------------- contact */
+  function renderContact(n) {
     const p = DATA.profile;
-    const text = DATA.contact && DATA.contact.text ? `<p class="contact-text">${esc(t(DATA.contact.text))}</p>` : "";
+    const text = DATA.contact && DATA.contact.text ? `<p class="cta-text">${esc(t(DATA.contact.text))}</p>` : "";
     return `<section id="contact" class="section" aria-labelledby="contact-title">
-      <div class="card contact reveal">
-        <h2 id="contact-title" class="section-title">${esc(S("headings").contact)}</h2>
+      <div class="cta reveal">
+        <span class="cta-grid" aria-hidden="true"></span>
+        <p class="eyebrow eyebrow-light"><span class="eyebrow-num">${String(n).padStart(2, "0")}</span>${esc(S("nav").contact)}</p>
+        <h2 id="contact-title" class="cta-title">${esc(H("contact"))}</h2>
         ${text}
-        <p class="contact-email"><a href="mailto:${esc(p.email)}">${esc(p.email)}</a>${copyBtn()}</p>
-        ${p.phone ? `<p class="contact-phone">${icon("phone")}<a href="${esc(telHref(p.phone))}">${esc(p.phone)}</a></p>` : ""}
-        <div class="contact-actions">
-          <a class="btn btn-primary" href="mailto:${esc(p.email)}">${icon("send")}<span>${esc(S("emailMe"))}</span></a>
-          <button type="button" class="btn btn-ghost" data-action="vcard">${icon("userPlus")}<span>${esc(S("saveContact"))}</span></button>
+        <p class="cta-email"><a href="mailto:${esc(p.email)}">${esc(p.email)}</a>${copyBtn("copy-light")}</p>
+        ${p.phone ? `<p class="cta-phone">${icon("phone")}<a href="${esc(telHref(p.phone))}">${esc(p.phone)}</a></p>` : ""}
+        <div class="cta-actions">
+          <a class="btn btn-light" href="mailto:${esc(p.email)}">${icon("send")}<span>${esc(S("emailMe"))}</span></a>
+          <button type="button" class="btn btn-outline-light" data-action="vcard">${icon("userPlus")}<span>${esc(S("saveContact"))}</span></button>
         </div>
       </div>
     </section>`;
@@ -378,12 +437,13 @@
     $(".skip-link").textContent = S("skipLink");
 
     renderTopbar();
-    $("#main").innerHTML = activeSections().map((id) => RENDERERS[id]()).join("") + renderFooter();
+    $("#main").innerHTML = activeSections().map((id, i) => RENDERERS[id](i)).join("") + renderFooter();
 
     const btt = $("#back-to-top");
     btt.setAttribute("aria-label", S("backToTop"));
     btt.innerHTML = icon("arrowUp");
 
+    bindStrengths();
     setupReveal();
     currentNav = null;
     onScroll();
@@ -394,7 +454,7 @@
   let revealObs = null;
   function setupReveal() {
     if (revealObs) revealObs.disconnect();
-    const els = $$(".reveal");
+    const els = $$(".reveal, .hero");
     if (!ANIM || !firstRender) {
       els.forEach((el) => el.classList.add("is-visible"));
       return;
@@ -405,8 +465,46 @@
         entry.target.classList.add("is-visible");
         revealObs.unobserve(entry.target);
       });
-    }, { rootMargin: "0px 0px -6% 0px", threshold: 0.06 });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
     els.forEach((el) => revealObs.observe(el));
+  }
+
+  /* ----------------------------------------------------- strengths (Venn) */
+  function setStrength(set) {
+    const wrap = $(".strengths-wrap");
+    if (!wrap) return;
+    wrap.classList.toggle("has-active", set !== null);
+    $$("[data-set]", wrap).forEach((el) => {
+      const on = set !== null && el.dataset.set === String(set);
+      el.classList.toggle("is-active", on);
+    });
+    $$(".venn-set", wrap).forEach((g) => g.setAttribute("aria-pressed", String(state.pinnedSet !== null && g.dataset.set === String(state.pinnedSet))));
+  }
+  function bindStrengths() {
+    const wrap = $(".strengths-wrap");
+    if (!wrap) return;
+    wrap.addEventListener("mouseover", (e) => {
+      const el = e.target.closest("[data-set]");
+      if (el) setStrength(el.dataset.set);
+    });
+    wrap.addEventListener("mouseleave", () => setStrength(state.pinnedSet));
+    wrap.addEventListener("focusin", (e) => {
+      const el = e.target.closest(".venn-set");
+      if (el) setStrength(el.dataset.set);
+    });
+    wrap.addEventListener("focusout", () => setStrength(state.pinnedSet));
+    wrap.addEventListener("keydown", (e) => {
+      const el = e.target.closest(".venn-set");
+      if (el && (e.key === "Enter" || e.key === " ")) {
+        e.preventDefault();
+        pinSet(el.dataset.set);
+      }
+    });
+    setStrength(state.pinnedSet);
+  }
+  function pinSet(set) {
+    state.pinnedSet = state.pinnedSet === String(set) ? null : String(set);
+    setStrength(state.pinnedSet);
   }
 
   /* ------------------------------------------------------- scroll handling */
@@ -418,16 +516,26 @@
       ticking = false;
       const doc = document.documentElement;
       const y = window.scrollY || doc.scrollTop;
-      const max = doc.scrollHeight - window.innerHeight;
+      const vh = window.innerHeight;
+      const max = doc.scrollHeight - vh;
       $("#progress-bar").style.transform = `scaleX(${max > 0 ? clamp(y / max, 0, 1) : 0})`;
       $("#back-to-top").classList.toggle("is-visible", y > 700);
       $("#topbar").classList.toggle("is-scrolled", y > 8);
 
+      // experience timeline fills as you scroll
+      const roles = $(".roles");
+      if (roles) {
+        const r = roles.getBoundingClientRect();
+        const line = vh * 0.6;
+        roles.style.setProperty("--fill", r.height > 0 ? clamp((line - r.top) / r.height, 0, 1).toFixed(4) : 0);
+        $$(".role", roles).forEach((el) => el.classList.toggle("is-reached", el.getBoundingClientRect().top + 30 < line));
+      }
+
       const sections = $$("#main > section");
       if (!sections.length) return;
-      const line = window.innerHeight * 0.35;
+      const spy = vh * 0.35;
       let active = sections[0].id;
-      sections.forEach((s) => { if (s.getBoundingClientRect().top <= line) active = s.id; });
+      sections.forEach((s) => { if (s.getBoundingClientRect().top <= spy) active = s.id; });
       if (max > 0 && y >= max - 4) active = sections[sections.length - 1].id;
       setActiveNav(active);
     });
@@ -442,6 +550,15 @@
       if (on) a.setAttribute("aria-current", "true");
       else a.removeAttribute("aria-current");
     });
+  }
+
+  function gotoRole(index) {
+    const el = document.getElementById(`role-${index}`);
+    if (!el) return;
+    el.scrollIntoView({ behavior: ANIM ? "smooth" : "auto", block: "center" });
+    el.classList.remove("flash");
+    void el.offsetWidth; // restart the animation
+    el.classList.add("flash");
   }
 
   /* ------------------------------------------------------- theme / language */
@@ -550,6 +667,8 @@
       case "theme": return toggleTheme();
       case "vcard": return downloadVCard();
       case "copy-email": return copyEmail(el);
+      case "goto-role": return gotoRole(el.dataset.index);
+      case "pin-set": return pinSet(el.dataset.set);
       case "top":
         window.scrollTo({ top: 0, behavior: ANIM ? "smooth" : "auto" });
         return;
@@ -559,7 +678,7 @@
 
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll, { passive: true });
-  window.addEventListener("beforeprint", () => $$(".reveal").forEach((el) => el.classList.add("is-visible")));
+  window.addEventListener("beforeprint", () => $$(".reveal, .hero").forEach((el) => el.classList.add("is-visible")));
 
   /* ------------------------------------------------------------------ boot */
   (function setFavicon() {

@@ -49,18 +49,22 @@ window.CV_DATA = {
     },
   },
 
-  // The four key facts under the summary. auto: "years" is calculated for you.
+  // The four key facts shown around the monogram card. auto: "years" is calculated for you.
+  // icon: clock | star | languages | cap
   highlights: [
-    { auto: "years", suffix: "+", label: { en: "years in education", sk: "rokov v školstve", hu: "év az oktatásban" } },
+    { icon: "clock", auto: "years", suffix: "+", label: { en: "years in education", sk: "rokov v školstve", hu: "év az oktatásban" } },
     {
+      icon: "star",
       value: { en: "Principal", sk: "Riaditeľ", hu: "Igazgató" },
       label: { en: "since March 2025", sk: "od marca 2025", hu: "2025 márciusa óta" },
     },
     {
+      icon: "languages",
       value: "3",
       label: { en: "working languages (HU\u00a0·\u00a0SK\u00a0·\u00a0EN)", sk: "pracovné jazyky (HU\u00a0·\u00a0SK\u00a0·\u00a0EN)", hu: "munkanyelv (HU\u00a0·\u00a0SK\u00a0·\u00a0EN)" },
     },
     {
+      icon: "cap",
       value: "Mgr.",
       label: {
         en: "Master's in teaching Informatics & English",
@@ -193,10 +197,11 @@ window.CV_DATA = {
     },
   ],
 
-  // icon: leader | digital | teaching
+  // icon: leader | digital | teaching · short: the label inside the Venn diagram
   strengths: [
     {
       icon: "leader",
+      short: { en: "Leadership", sk: "Vedenie", hu: "Vezetés" },
       title: { en: "School leadership", sk: "Vedenie školy", hu: "Iskolavezetés" },
       items: {
         en: ["Strategic and day-to-day school management", "Budget and resource planning", "Staff leadership and professional development", "Parent and community relations", "School documentation and internal rules"],
@@ -206,6 +211,7 @@ window.CV_DATA = {
     },
     {
       icon: "digital",
+      short: { en: "Digital", sk: "Digitál", hu: "Digitális" },
       title: { en: "Digital education", sk: "Digitálne vzdelávanie", hu: "Digitális oktatás" },
       items: {
         en: ["Digital transformation of schools", "E-learning platforms", "School IT systems and networks (CCNA)", "Digital-skills training for teachers"],
@@ -215,6 +221,7 @@ window.CV_DATA = {
     },
     {
       icon: "teaching",
+      short: { en: "Teaching", sk: "Pedagogika", hu: "Pedagógia" },
       title: { en: "Teaching", sk: "Pedagogika", hu: "Pedagógia" },
       items: {
         en: ["English language teaching", "Informatics, programming and algorithms", "Curriculum and learning-material design", "Assessment and individual feedback"],
@@ -275,9 +282,9 @@ window.CV_DATA = {
   ],
 
   languages: [
-    { name: { en: "Hungarian", sk: "Maďarčina", hu: "Magyar" }, level: { en: "Native", sk: "Materinský jazyk", hu: "Anyanyelv" }, percent: 100 },
-    { name: { en: "Slovak", sk: "Slovenčina", hu: "Szlovák" }, level: { en: "C1 · Proficient", sk: "C1 · Skúsený používateľ", hu: "C1 · Felsőfok" }, percent: 88 },
-    { name: { en: "English", sk: "Angličtina", hu: "Angol" }, level: { en: "C1 · Proficient", sk: "C1 · Skúsený používateľ", hu: "C1 · Felsőfok" }, percent: 88 },
+    { code: "HU", name: { en: "Hungarian", sk: "Maďarčina", hu: "Magyar" }, level: { en: "Native", sk: "Materinský jazyk", hu: "Anyanyelv" }, percent: 100 },
+    { code: "SK", name: { en: "Slovak", sk: "Slovenčina", hu: "Szlovák" }, level: { en: "C1 · Proficient", sk: "C1 · Skúsený používateľ", hu: "C1 · Felsőfok" }, percent: 88 },
+    { code: "EN", name: { en: "English", sk: "Angličtina", hu: "Angol" }, level: { en: "C1 · Proficient", sk: "C1 · Skúsený používateľ", hu: "C1 · Felsőfok" }, percent: 88 },
   ],
 
   contact: {

@@ -7,12 +7,14 @@ Personal CV website: a single page in **English, Slovak and Hungarian**. It is p
 
 ## What's on the page
 
-- **Highlights first:** name, role, a short summary, contact details and four key facts at the top.
-- **Career path:** a one-line view of the progression from teacher to principal, followed by each role with 2–3 key points.
-- **Key strengths, education & qualifications, languages, contact.**
+- **Hero:** name, role (with a highlighter effect), a short summary, contact details and a tilted monogram card with four floating key facts.
+- **Career stairs:** the progression from teacher to principal drawn as rising steps; select a step to jump to that role.
+- **Experience timeline** that fills in as you scroll, with 2–3 key points per role.
+- **Strengths Venn diagram:** where leadership, digital education and teaching overlap; hover or select an area to highlight it.
+- **Learning path** (degrees, attestations, courses) and **language rings**.
+- **Contact band** with one-click email copy and a "Save contact" vCard.
 - **EN / SK / HU switch.** The page opens in the visitor's browser language, and `?lang=sk` / `?lang=hu` links open a specific language. Hungarian uses Hungarian name order and place names (Fazekas Csaba, Fülek).
-- **Light / dark theme**, sticky section menu, works on phones.
-- **Save contact:** downloads a vCard; one click copies the email address.
+- **Light / dark theme**, sticky section menu, works on phones; animations switch off for visitors who prefer reduced motion.
 
 ## Updating the content
 
