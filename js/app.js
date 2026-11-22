@@ -295,9 +295,9 @@
           </div>
         </div>
         <div class="hero-visual">
-          <div class="portrait">
+          <div class="portrait${p.photo ? " has-photo" : ""}">
             <span class="portrait-grid" aria-hidden="true"></span>
-            ${p.photo ? `<img src="${esc(p.photo)}" alt="${esc(name)}">` : `<span class="portrait-initials" aria-hidden="true">${esc(initials())}</span>`}
+            ${p.photo ? `<img src="${esc(p.photo)}" alt="${esc(name)}" width="540" height="660" decoding="async">` : `<span class="portrait-initials" aria-hidden="true">${esc(initials())}</span>`}
           </div>
           ${chips ? `<ul class="float-chips">${chips}</ul>` : ""}
         </div>

@@ -23,7 +23,7 @@ All text lives in [`js/cv-data.js`](js/cv-data.js). Each text is either a plain 
 
 - **New role:** add it to the top of `experience` (dates as `"YYYY-MM"`, `"present"` for the current one). The career path, durations and "years in education" update automatically.
 - **Training topics:** edit `training.topics` (title, short text, icon: digital | grid | shield | sparkles | plus).
-- **Photo:** add e.g. `assets/photo.jpg` and set `profile.photo: "assets/photo.jpg"`.
+- **Photo:** replace `assets/photo.jpg` (portrait, 540 × 660 px). Set `profile.photo: ""` to show initials instead.
 - **Phone / LinkedIn:** fill in `profile.phone` or un-comment the LinkedIn line in `profile.socials`.
 - **Colours:** change `--accent` (and its dark-mode twin) in `css/style.css`.
 

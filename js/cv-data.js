@@ -19,7 +19,7 @@ window.CV_DATA = {
   profile: {
     firstName: "Csaba",
     lastName: "Fazekas",
-    photo: "", // e.g. "assets/photo.jpg"; leave empty to show initials
+    photo: "assets/photo.jpg", // 540 x 660 px portrait; leave empty ("") to show initials instead
     title: {
       en: "Educator & leader in digital education",
       sk: "Pedagóg a líder v digitálnom vzdelávaní",
