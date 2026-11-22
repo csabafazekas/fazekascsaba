@@ -295,11 +295,70 @@ window.CV_DATA = {
     { code: "EN", name: { en: "English", sk: "Angličtina", hu: "Angol" }, level: { en: "C1 · Proficient", sk: "C1 · Skúsený používateľ", hu: "C1 · Felsőfok" }, percent: 88 },
   ],
 
+  // Training I offer for teaching staff. icon: digital | grid | shield | sparkles | plus
+  training: {
+    intro: {
+      en: "I offer training on topics ranging from digitalisation and EduPage to cybersecurity and artificial intelligence. As a trainer, I have already delivered several such courses for teachers.",
+      sk: "Ponúkam školenia na témy od digitalizácie a EduPage až po kybernetickú bezpečnosť a umelú inteligenciu. Ako lektor mám za sebou už niekoľko takýchto školení.",
+      hu: "Képzéseket kínálok a digitalizációtól és az EduPage-től a kiberbiztonságig és a mesterséges intelligenciáig. Előadóként már több ilyen képzést is tartottam.",
+    },
+    topics: [
+      {
+        icon: "digital",
+        title: { en: "Digitalisation", sk: "Digitalizácia", hu: "Digitalizáció" },
+        text: {
+          en: "Digital tools for teaching and everyday school work.",
+          sk: "Digitálne nástroje vo výučbe a v každodennej práci školy.",
+          hu: "Digitális eszközök a tanításban és az iskola mindennapi munkájában.",
+        },
+      },
+      {
+        icon: "grid",
+        title: "EduPage",
+        text: {
+          en: "Getting the most out of EduPage at school.",
+          sk: "Efektívne využívanie systému EduPage v škole.",
+          hu: "Az EduPage hatékony használata az iskolában.",
+        },
+      },
+      {
+        icon: "shield",
+        title: { en: "Cybersecurity", sk: "Kybernetická bezpečnosť", hu: "Kiberbiztonság" },
+        text: {
+          en: "Staying safe online, protecting data and recognising threats.",
+          sk: "Bezpečné správanie online, ochrana údajov a rozpoznávanie hrozieb.",
+          hu: "Biztonságos internethasználat, adatvédelem és a veszélyek felismerése.",
+        },
+      },
+      {
+        icon: "sparkles",
+        title: { en: "Artificial intelligence", sk: "Umelá inteligencia", hu: "Mesterséges intelligencia" },
+        text: {
+          en: "Using AI meaningfully in lesson planning and teaching.",
+          sk: "Zmysluplné využitie AI pri príprave a vo vyučovaní.",
+          hu: "A mesterséges intelligencia értelmes használata a felkészülésben és a tanításban.",
+        },
+      },
+      {
+        icon: "plus",
+        more: true,
+        title: { en: "…and more", sk: "…a ďalšie", hu: "…és még sok más" },
+        text: {
+          en: "Other topics to suit your school's needs.",
+          sk: "Ďalšie témy podľa potrieb vašej školy.",
+          hu: "További témák az iskola igényei szerint.",
+        },
+      },
+    ],
+    cta: { en: "Ask about training", sk: "Mám záujem o školenie", hu: "Érdeklődöm a képzés iránt" },
+    subject: { en: "Training for teaching staff", sk: "Školenie pre pedagogických zamestnancov", hu: "Képzés pedagógusoknak" },
+  },
+
   contact: {
     text: {
-      en: "Interested in working together or want to know more? Email is the best way to reach me.",
-      sk: "Máte záujem o spoluprácu alebo viac informácií? Najlepšie ma zastihnete e-mailom.",
-      hu: "Együttműködésről vagy további részletekről érdeklődne? E-mailben érhet el a legkönnyebben.",
+      en: "Interested in training for your teaching staff, working together or want to know more? Email is the best way to reach me.",
+      sk: "Máte záujem o školenie pre váš pedagogický zbor, o spoluprácu alebo viac informácií? Najlepšie ma zastihnete e-mailom.",
+      hu: "Képzést szervezne a tantestületének, együttműködne, vagy további részletekre kíváncsi? E-mailben érhet el a legkönnyebben.",
     },
   },
 };

@@ -21,6 +21,7 @@
   --c1: #0f766e;
   --c2: #1d4ed8;
   --c3: #b45309;
+  --c4: #7c3aed;
   --marker: rgba(250, 204, 21, 0.5);
   --grid: rgba(15, 118, 110, 0.09);
   --glow: rgba(15, 118, 110, 0.09);
@@ -59,6 +60,7 @@
     --c1: #2dd4bf;
     --c2: #60a5fa;
     --c3: #fbbf24;
+    --c4: #a78bfa;
     --marker: rgba(45, 212, 191, 0.3);
     --grid: rgba(45, 212, 191, 0.06);
     --glow: rgba(45, 212, 191, 0.06);
@@ -88,6 +90,7 @@
   --c1: #2dd4bf;
   --c2: #60a5fa;
   --c3: #fbbf24;
+  --c4: #a78bfa;
   --marker: rgba(45, 212, 191, 0.3);
   --grid: rgba(45, 212, 191, 0.06);
   --glow: rgba(45, 212, 191, 0.06);
@@ -279,6 +282,8 @@ code { font-family: var(--font-mono); font-size: 0.92em; }
 .btn-primary:hover { background: var(--accent-strong); }
 .btn-light { background: #fff; color: #0b3b45; box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.5); }
 .btn-light:hover { background: #ecfdf8; }
+.btn-ghost { background: var(--surface); border-color: var(--border); color: var(--text); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
 .btn-outline-light { background: transparent; border-color: rgba(255, 255, 255, 0.5); color: #fff; }
 .btn-outline-light:hover { background: rgba(255, 255, 255, 0.12); border-color: #fff; }
 
@@ -688,6 +693,37 @@ code { font-family: var(--font-mono); font-size: 0.92em; }
 .ring-name { margin-top: 12px; font-weight: 700; }
 .ring-level { margin-top: 2px; font-size: 13.5px; line-height: 1.35; color: var(--text-muted); }
 
+/* ----------------------------------------------------------- training */
+.training-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px 32px; margin: -8px 0 28px; }
+.training-intro { flex: 1 1 420px; max-width: 64ch; font-size: 1.06rem; line-height: 1.65; color: var(--text-muted); }
+.topics { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
+.topic {
+  --tc: var(--accent);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px 18px 18px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  overflow: hidden;
+  transition: opacity 0.7s var(--ease) calc(var(--i, 0) * 70ms), transform 0.7s var(--ease) calc(var(--i, 0) * 70ms), translate 0.25s var(--ease), border-color 0.25s, box-shadow 0.25s;
+}
+.topic.t-1 { --tc: var(--c1); }
+.topic.t-2 { --tc: var(--c2); }
+.topic.t-3 { --tc: var(--c3); }
+.topic.t-4 { --tc: var(--c4); }
+.topic::before { content: ""; position: absolute; inset: 0 0 auto; height: 3px; background: var(--tc); opacity: 0.85; }
+.topic:hover { translate: 0 -4px; border-color: color-mix(in srgb, var(--tc) 45%, var(--border)); box-shadow: var(--shadow); }
+.topic-icon { display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 4px; border-radius: 13px; background: color-mix(in srgb, var(--tc) 14%, transparent); color: var(--tc); }
+.topic-icon .icon { width: 21px; height: 21px; }
+.topic-title { font-size: 1.02rem; font-weight: 700; line-height: 1.3; }
+.topic-text { font-size: 13.5px; line-height: 1.5; color: var(--text-muted); }
+.topic-more { border-style: dashed; background: transparent; }
+.topic-more::before { display: none; }
+.topic-more .topic-icon { background: var(--surface-2); color: var(--text-muted); }
+
 /* ------------------------------------------------------------ contact */
 .cta {
   position: relative;
@@ -800,6 +836,7 @@ code { font-family: var(--font-mono); font-size: 0.92em; }
 
 /* ---------------------------------------------------------- responsive */
 @media (max-width: 1000px) {
+  .topics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .topnav { display: none; }
   .topnav + .top-controls { margin-left: auto; }
   .lpath { grid-template-columns: 1fr; gap: 20px; }
@@ -818,6 +855,8 @@ code { font-family: var(--font-mono); font-size: 0.92em; }
 }
 
 @media (max-width: 760px) {
+  .topics { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .topic { padding: 16px 14px 14px; }
   .section { padding-top: 80px; }
   .stairs-wrap { padding: 18px 18px 18px 0; }
   .stairs-head { padding-left: 18px; }
@@ -866,6 +905,7 @@ code { font-family: var(--font-mono); font-size: 0.92em; }
   .rings { gap: 8px; }
   .ring-level { font-size: 12px; }
   .cta-actions .btn { flex: 1 1 100%; }
+  .training-head .btn { flex: 1 1 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -889,7 +929,7 @@ code { font-family: var(--font-mono); font-size: 0.92em; }
   body { background: #fff; font-size: 9.8pt; line-height: 1.45; }
   body::before, .hero::before { display: none; }
   a { text-decoration: none; }
-  .skip-link, .topbar, .toast, .back-to-top, .copy-btn, .hero-actions, .hero-visual, .scroll-cue,
+  .skip-link, .topbar, .toast, .back-to-top, .copy-btn, .hero-actions, .hero-visual, .scroll-cue, .training-head .btn,
   .stairs-wrap, .venn, #contact, .site-footer, .roles::before, .roles::after, .role::before { display: none !important; }
   .anim .reveal, .reveal, .anim .hero-copy > *, .anim .lp-item, .lp-item { opacity: 1 !important; transform: none !important; }
   .page { max-width: none; padding: 0; }
@@ -934,6 +974,14 @@ code { font-family: var(--font-mono); font-size: 0.92em; }
   .lp-title { margin-top: 1pt; font-size: 9.2pt; }
   .lp-org { margin-top: 0; font-size: 8.4pt; }
   .langs { margin-top: 10pt; break-inside: avoid; }
+  .training-head { margin: 0 0 6pt; }
+  .training-intro { font-size: 9.6pt; color: var(--text); max-width: none; }
+  .topics { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6pt; break-inside: avoid; }
+  .topic { padding: 6pt 7pt; border-radius: 6pt; gap: 2pt; opacity: 1 !important; transform: none !important; }
+  .topic-icon { width: 16pt; height: 16pt; margin: 0; border-radius: 4pt; }
+  .topic-icon .icon { width: 10pt; height: 10pt; }
+  .topic-title { font-size: 9.2pt; }
+  .topic-text { font-size: 8.2pt; }
   .rings { margin-top: 5pt; gap: 7pt; }
   .ring-item { flex-direction: row; gap: 8pt; padding: 6pt 8pt; border-radius: 6pt; text-align: left; }
   .ring { width: 30pt; height: 30pt; flex: none; }

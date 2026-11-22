@@ -17,7 +17,7 @@
   const UI = {
     en: {
       langName: "English",
-      nav: { about: "About", experience: "Experience", skills: "Strengths", education: "Education", contact: "Contact" },
+      nav: { about: "About", experience: "Experience", skills: "Strengths", training: "Training", education: "Education", contact: "Contact" },
       headings: {
         experience: "From the teacher's desk to the digital school",
         path: "Career path",
@@ -27,6 +27,8 @@
         education: "Always learning",
         languages: "Languages",
         contact: "Let's talk",
+        training: "Training for teaching staff",
+        trainingLink: "Training for teachers",
       },
       kinds: { degree: "Degree", qual: "Qualification" },
       fullName: (first, last) => `${first} ${last}`,
@@ -47,7 +49,7 @@
     },
     sk: {
       langName: "Slovenčina",
-      nav: { about: "O mne", experience: "Skúsenosti", skills: "Silné stránky", education: "Vzdelanie", contact: "Kontakt" },
+      nav: { about: "O mne", experience: "Skúsenosti", skills: "Silné stránky", training: "Školenia", education: "Vzdelanie", contact: "Kontakt" },
       headings: {
         experience: "Od katedry k digitálnej škole",
         path: "Kariérna cesta",
@@ -57,6 +59,8 @@
         education: "Neustále sa vzdelávam",
         languages: "Jazykové znalosti",
         contact: "Spojme sa",
+        training: "Školenia pre pedagogických zamestnancov",
+        trainingLink: "Školenia pre pedagógov",
       },
       kinds: { degree: "Štúdium", qual: "Kvalifikácia" },
       fullName: (first, last) => `${first} ${last}`,
@@ -78,7 +82,7 @@
     },
     hu: {
       langName: "Magyar",
-      nav: { about: "Rólam", experience: "Tapasztalat", skills: "Erősségek", education: "Végzettség", contact: "Kapcsolat" },
+      nav: { about: "Rólam", experience: "Tapasztalat", skills: "Erősségek", training: "Képzések", education: "Végzettség", contact: "Kapcsolat" },
       headings: {
         experience: "A katedrától a digitális iskoláig",
         path: "Szakmai út",
@@ -88,6 +92,8 @@
         education: "Folyamatosan tanulok",
         languages: "Nyelvtudás",
         contact: "Beszéljünk",
+        training: "Képzések pedagógusoknak",
+        trainingLink: "Képzések pedagógusoknak",
       },
       kinds: { degree: "Diploma", qual: "Képesítés" },
       fullName: (first, last) => `${last} ${first}`,
@@ -129,6 +135,11 @@
     leader: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
     digital: '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>',
     teaching: '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+    grid: '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/>',
+    shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>',
+    sparkles: '<path d="M12 3l1.9 5.8L20 10.5l-6.1 1.7L12 18l-1.9-5.8L4 10.5l6.1-1.7L12 3z"/><path d="M19 2v4M17 4h4M5 18v4M3 20h4"/>',
+    plus: '<path d="M12 5v14M5 12h14"/>',
+    presentation: '<path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/>',
     link: '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>',
     github: '<path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/>',
     linkedin: '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>',
@@ -219,6 +230,7 @@
     ["about", () => true],
     ["experience", () => (DATA.experience || []).length],
     ["skills", () => (DATA.strengths || []).length],
+    ["training", () => !!(DATA.training && (DATA.training.topics || []).length)],
     ["education", () => (DATA.education || []).length || (DATA.qualifications || []).length || (DATA.languages || []).length],
     ["contact", () => !!DATA.profile.email],
   ];
@@ -277,7 +289,10 @@
           <p class="role-title"><span class="marker">${esc(t(p.title))}</span></p>
           ${summary.length ? `<div class="summary">${summary.map((s) => `<p>${esc(fill(s))}</p>`).join("")}</div>` : ""}
           ${meta ? `<ul class="meta">${meta}</ul>` : ""}
-          ${p.email ? `<div class="hero-actions"><a class="btn btn-primary" href="mailto:${esc(p.email)}">${icon("send")}<span>${esc(S("emailMe"))}</span></a></div>` : ""}
+          <div class="hero-actions">
+            ${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}">${icon("send")}<span>${esc(S("emailMe"))}</span></a>` : ""}
+            ${DATA.training ? `<a class="btn btn-ghost" href="#training">${icon("presentation")}<span>${esc(H("trainingLink"))}</span></a>` : ""}
+          </div>
         </div>
         <div class="hero-visual">
           <div class="portrait">
@@ -399,6 +414,27 @@
     </section>`;
   }
 
+  /* ------------------------------------------------------------- training */
+  function renderTraining(n) {
+    const tr = DATA.training;
+    const mail = DATA.profile.email
+      ? `mailto:${esc(DATA.profile.email)}?subject=${encodeURIComponent(t(tr.subject) || H("training"))}`
+      : "";
+    const topics = (tr.topics || []).map((tp, i) => `<li class="topic reveal${tp.more ? " topic-more" : ` t-${(i % 4) + 1}`}" style="--i:${i}">
+        <span class="topic-icon">${icon(tp.icon || "star")}</span>
+        <h3 class="topic-title">${esc(t(tp.title))}</h3>
+        ${tp.text ? `<p class="topic-text">${esc(t(tp.text))}</p>` : ""}
+      </li>`).join("");
+    return `<section id="training" class="section" aria-labelledby="training-title">
+      ${sectionHead("training", n)}
+      <div class="training-head reveal">
+        ${tr.intro ? `<p class="training-intro">${esc(t(tr.intro))}</p>` : ""}
+        ${mail ? `<a class="btn btn-primary" href="${mail}">${icon("send")}<span>${esc(t(tr.cta) || S("emailMe"))}</span></a>` : ""}
+      </div>
+      <ul class="topics">${topics}</ul>
+    </section>`;
+  }
+
   /* -------------------------------------------------------------- contact */
   function renderContact(n) {
     const p = DATA.profile;
@@ -424,7 +460,7 @@
       ${DATA.meta && DATA.meta.lastUpdated ? `<p>${esc(S("lastUpdated"))}: ${esc(fmtDate(DATA.meta.lastUpdated))}</p>` : ""}
     </footer>`;
 
-  const RENDERERS = { about: renderAbout, experience: renderExperience, skills: renderStrengths, education: renderEducation, contact: renderContact };
+  const RENDERERS = { about: renderAbout, experience: renderExperience, skills: renderStrengths, training: renderTraining, education: renderEducation, contact: renderContact };
 
   function render() {
     const name = fullName();
