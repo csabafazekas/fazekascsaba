@@ -7,9 +7,6 @@
    • Dates are "YYYY-MM" or "YYYY". Use "present" for the current role.
    • In summaries, {years} is replaced with your years in education,
      calculated from the earliest role below.
-   • The three pillars (digital · teaching · leadership) set the colours of
-     the strengths diagram and the career-path chart. Each role's `area`
-     must be one of the `id`s in `strengths`.
    ========================================================================== */
 
 window.CV_DATA = {
@@ -43,11 +40,11 @@ window.CV_DATA = {
     summary: {
       en: [
         "I'm an educator from Fiľakovo, Slovakia, with more than {years} years of experience teaching informatics and English in primary and secondary schools. As a school digital coordinator, I introduced digital tools, managed school IT systems and trained teachers to use technology with confidence.",
-        "I bring together teaching, technology and leadership: I lead and motivate colleagues as they bring new methods and tools into the classroom. I work fluently in Hungarian, Slovak and English.",
+        "I bring together teaching, technology and leadership: I lead and motivate colleagues as they bring new methods and tools into the classroom. I work confidently in Hungarian, Slovak and English.",
       ],
       sk: [
         "Som pedagóg z Fiľakova a za sebou mám viac ako {years} rokov praxe vo vyučovaní informatiky a anglického jazyka na základnej aj strednej škole. Ako školský digitálny koordinátor mám skúsenosti so zavádzaním digitálnych nástrojov, správou školských IT systémov a so školením učiteľov.",
-        "Spájam pedagogiku, technológie a líderstvo: vediem a motivujem kolegov pri zavádzaní nových metód a nástrojov do výučby. Plynule pracujem po maďarsky, slovensky aj anglicky.",
+        "Spájam pedagogiku, technológie a líderstvo: vediem a motivujem kolegov pri zavádzaní nových metód a nástrojov do výučby. S istotou pracujem po maďarsky, slovensky aj anglicky.",
       ],
       hu: [
         "Füleki pedagógus vagyok, több mint {years} év tapasztalattal az informatika és az angol nyelv tanításában alap- és középiskolában. Iskolai digitális koordinátorként digitális eszközöket vezettem be, iskolai informatikai rendszereket kezeltem, és pedagógusokat képeztem.",
@@ -57,7 +54,7 @@ window.CV_DATA = {
   },
 
   // The four key facts shown around the monogram card. auto: "years" is calculated for you.
-  // icon: clock | digital | leader | languages | cap | star
+  // icon: clock | digital | star | languages | cap
   highlights: [
     { icon: "clock", auto: "years", suffix: "+", label: { en: "years in education", sk: "rokov v školstve", hu: "év az oktatásban" } },
     {
@@ -66,59 +63,24 @@ window.CV_DATA = {
       label: "2021 – 2024",
     },
     {
-      icon: "leader",
-      value: { en: "Leadership", sk: "Líderstvo", hu: "Vezetés" },
-      label: { en: "leading a teaching team since 2024", sk: "vedenie pedagogického tímu od 2024", hu: "tantestület vezetése 2024 óta" },
-    },
-    {
       icon: "languages",
       value: "3",
-      label: { en: "working languages (HU · SK · EN)", sk: "pracovné jazyky (HU · SK · EN)", hu: "munkanyelv (HU · SK · EN)" },
-    },
-  ],
-
-  // The three pillars, in display order. id is used by experience[].area.
-  // short: the label inside the diagram and the chart legend.
-  strengths: [
-    {
-      id: "digital",
-      icon: "digital",
-      short: { en: "Digitalisation", sk: "Digitalizácia", hu: "Digitalizáció" },
-      title: { en: "Digitalisation of education", sk: "Digitalizácia vzdelávania", hu: "Az oktatás digitalizációja" },
-      items: {
-        en: ["Digital transformation of schools", "Digital tools for teaching and administration", "E-learning platforms", "School IT systems and networks (CCNA)", "Digital-skills training for teachers and pupils"],
-        sk: ["Digitálna transformácia školy", "Digitálne nástroje vo výučbe a administratíve", "E-learningové platformy", "Školské IT systémy a siete (CCNA)", "Školenia digitálnych zručností pre učiteľov a žiakov"],
-        hu: ["Az iskola digitális átalakítása", "Digitális eszközök a tanításban és az adminisztrációban", "E-learning platformok", "Iskolai informatikai rendszerek és hálózatok (CCNA)", "Digitáliskészség-képzés pedagógusoknak és diákoknak"],
-      },
+      label: { en: "working languages (HU\u00a0·\u00a0SK\u00a0·\u00a0EN)", sk: "pracovné jazyky (HU\u00a0·\u00a0SK\u00a0·\u00a0EN)", hu: "munkanyelv (HU\u00a0·\u00a0SK\u00a0·\u00a0EN)" },
     },
     {
-      id: "teaching",
-      icon: "teaching",
-      short: { en: "Teaching", sk: "Pedagogika", hu: "Pedagógia" },
-      title: { en: "Teaching", sk: "Pedagogika", hu: "Pedagógia" },
-      items: {
-        en: ["Informatics: programming and algorithms", "English at different proficiency levels", "Curricula and online learning materials", "Assessment and individual feedback", "Innovative teaching methods"],
-        sk: ["Informatika: programovanie a algoritmy", "Anglický jazyk na rôznych úrovniach", "Tvorba učebných plánov a online materiálov", "Hodnotenie a individuálna spätná väzba", "Inovatívne metódy výučby"],
-        hu: ["Informatika: programozás és algoritmusok", "Angol nyelv különböző szinteken", "Tantervek és online tananyagok", "Értékelés és egyéni visszajelzés", "Innovatív tanítási módszerek"],
-      },
-    },
-    {
-      id: "leadership",
-      icon: "leader",
-      short: { en: "Leadership", sk: "Líderstvo", hu: "Vezetés" },
-      title: { en: "Leadership", sk: "Líderstvo", hu: "Vezetés" },
-      items: {
-        en: ["Leading and motivating a team", "Teacher training and professional development", "Introducing change and innovation", "Coordinating projects and events", "Working with parents and the community"],
-        sk: ["Vedenie a motivácia tímu", "Profesijný rozvoj a školenia učiteľov", "Zavádzanie zmien a inovácií", "Koordinácia projektov a podujatí", "Spolupráca s rodičmi a komunitou"],
-        hu: ["Csapatvezetés és motiválás", "Pedagógusok képzése és szakmai fejlődése", "Változások és innovációk bevezetése", "Projektek és rendezvények koordinálása", "Együttműködés a szülőkkel és a közösséggel"],
+      icon: "cap",
+      value: "Mgr.",
+      label: {
+        en: "Master's in teaching Informatics & English",
+        sk: "učiteľstvo informatiky a anglického jazyka",
+        hu: "informatika–angol szakos tanár",
       },
     },
   ],
 
-  // Newest first. `short` is the label in the career-path chart; `area` is a strengths id.
+  // Newest first. `short` is the label used in the career-path strip.
   experience: [
     {
-      area: "leadership",
       role: { en: "Principal", sk: "Riaditeľ základnej školy", hu: "Igazgató" },
       short: { en: "Principal", sk: "Riaditeľ školy", hu: "Igazgató" },
       org: { en: "Štefan Koháry II. Primary School", sk: "ZŠ Štefana Koháriho II. s VJM", hu: "II. Koháry István Alapiskola" },
@@ -127,24 +89,23 @@ window.CV_DATA = {
       end: "present",
       highlights: {
         en: [
-          "Lead and motivate the teaching team; organise training and professional development for teachers.",
-          "Develop the school education programme and introduce innovative teaching methods.",
-          "Build relationships with pupils, parents and the local community.",
+          "Lead the school's pedagogical, administrative and operational work, and its relationships with parents and the local community.",
+          "Manage the budget, financial planning and the effective use of staff and resources.",
+          "Develop the school education programme, introduce innovative teaching methods and lead teachers' professional development.",
         ],
         sk: [
-          "Vedenie a motivácia pedagogického tímu, organizovanie školení a profesijného rozvoja učiteľov.",
-          "Rozvoj školského vzdelávacieho programu a zavádzanie inovatívnych metód výučby.",
-          "Budovanie vzťahov so žiakmi, rodičmi a miestnou komunitou.",
+          "Riadenie pedagogickej, administratívnej a prevádzkovej činnosti školy a budovanie vzťahov s rodičmi a miestnou komunitou.",
+          "Správa rozpočtu, finančné plánovanie a efektívne využívanie ľudských a materiálnych zdrojov.",
+          "Rozvoj školského vzdelávacieho programu, zavádzanie inovatívnych metód výučby a vedenie profesijného rozvoja učiteľov.",
         ],
         hu: [
-          "Vezetem és motiválom a tantestületet, képzéseket és szakmai továbbképzéseket szervezek a pedagógusoknak.",
-          "Fejlesztem az iskolai nevelési-oktatási programot, és innovatív tanítási módszereket vezetek be.",
-          "Kapcsolatot építek a diákokkal, a szülőkkel és a helyi közösséggel.",
+          "Irányítom az iskola pedagógiai, adminisztratív és működési tevékenységét, és építem a kapcsolatot a szülőkkel és a helyi közösséggel.",
+          "Felelek a költségvetésért, a pénzügyi tervezésért, valamint az emberi és anyagi erőforrások hatékony felhasználásáért.",
+          "Fejlesztem az iskolai nevelési-oktatási programot, innovatív tanítási módszereket vezetek be, és irányítom a pedagógusok szakmai fejlődését.",
         ],
       },
     },
     {
-      area: "leadership",
       role: { en: "Deputy Principal", sk: "Zástupca riaditeľa školy", hu: "Igazgatóhelyettes" },
       short: { en: "Deputy principal", sk: "Zástupca riaditeľa", hu: "Igazgatóhelyettes" },
       org: { en: "Štefan Koháry II. Primary School", sk: "ZŠ Štefana Koháriho II. s VJM", hu: "II. Koháry István Alapiskola" },
@@ -153,21 +114,23 @@ window.CV_DATA = {
       end: "2025-02",
       highlights: {
         en: [
-          "Supported, advised and supervised the teaching staff.",
-          "Coordinated school projects, events and extracurricular activities.",
+          "Coordinated the day-to-day running of the school, keeping lessons and activities running smoothly.",
+          "Supported and supervised the teaching staff and evaluated teaching performance.",
+          "Organised school events and projects; managed school documentation and internal rules.",
         ],
         sk: [
-          "Podpora, poradenstvo a supervízia pedagogického zboru.",
-          "Koordinácia školských projektov, podujatí a mimoškolských aktivít.",
+          "Koordinácia každodenného chodu školy a zabezpečenie hladkého priebehu vyučovania a školských aktivít.",
+          "Podpora a supervízia pedagogického zboru, hodnotenie pedagogických výkonov.",
+          "Organizácia školských podujatí a projektov, správa školskej dokumentácie a vnútorných predpisov.",
         ],
         hu: [
-          "Támogattam, tanácsokkal segítettem és felügyeltem a tantestület munkáját.",
-          "Koordináltam az iskolai projekteket, rendezvényeket és a tanórán kívüli tevékenységeket.",
+          "Koordináltam az iskola mindennapi működését, és biztosítottam a tanítás és az iskolai programok zavartalan menetét.",
+          "Támogattam és felügyeltem a tantestület munkáját, értékeltem a pedagógiai teljesítményt.",
+          "Iskolai rendezvényeket és projekteket szerveztem, kezeltem az iskolai dokumentációt és a belső szabályzatokat.",
         ],
       },
     },
     {
-      area: "digital",
       role: { en: "School Digital Coordinator", sk: "Školský digitálny koordinátor", hu: "Iskolai digitális koordinátor" },
       short: { en: "Digital coordinator", sk: "Digitálny koordinátor", hu: "Digitális koordinátor" },
       org: { en: "Štefan Koháry II. Primary School", sk: "ZŠ Štefana Koháriho II. s VJM", hu: "II. Koháry István Alapiskola" },
@@ -193,7 +156,6 @@ window.CV_DATA = {
       },
     },
     {
-      area: "teaching",
       role: { en: "Informatics Teacher (secondary)", sk: "Učiteľ informatiky na SŠ", hu: "Középiskolai informatikatanár" },
       short: { en: "Informatics teacher, grammar school", sk: "Učiteľ informatiky na gymnáziu", hu: "Informatikatanár (gimnázium)" },
       org: { en: "Fiľakovo Grammar School", sk: "Gymnázium – Gimnázium Fiľakovo", hu: "Füleki Gimnázium" },
@@ -203,23 +165,19 @@ window.CV_DATA = {
       highlights: {
         en: [
           "Taught informatics, including programming, algorithms and computer systems.",
-          "Prepared curricula, tests and online learning materials.",
-          "Gave students individual help and feedback to improve their skills.",
+          "Prepared curricula, tests and online learning materials, and gave students individual support.",
         ],
         sk: [
           "Vyučovanie informatiky vrátane programovania, algoritmov a práce s počítačovými systémami.",
-          "Príprava učebných plánov, testov a online materiálov.",
-          "Individuálna pomoc a spätná väzba na zlepšenie zručností študentov.",
+          "Príprava učebných plánov, testov a online materiálov, individuálna podpora študentov.",
         ],
         hu: [
           "Informatikát tanítottam, beleértve a programozást, az algoritmusokat és a számítógépes rendszereket.",
-          "Tanterveket, teszteket és online tananyagokat készítettem.",
-          "Egyéni segítséget és visszajelzést adtam a diákoknak készségeik fejlesztéséhez.",
+          "Tanterveket, teszteket és online tananyagokat készítettem, és egyénileg támogattam a diákokat.",
         ],
       },
     },
     {
-      area: "teaching",
       role: { en: "Teacher of English and Informatics", sk: "Učiteľ anglického jazyka a informatiky", hu: "Angol- és informatikatanár" },
       short: { en: "English & informatics teacher", sk: "Učiteľ ANJ a informatiky", hu: "Angol- és informatikatanár" },
       org: { en: "Štefan Koháry II. Primary School", sk: "ZŠ Štefana Koháriho II. s VJM", hu: "II. Koháry István Alapiskola" },
@@ -228,20 +186,51 @@ window.CV_DATA = {
       end: "2024-06",
       highlights: {
         en: [
-          "Taught English across a range of proficiency levels.",
-          "Developed pupils' digital competences, including programming.",
-          "Created teaching aids and materials; assessed pupils and supported their progress.",
+          "Taught English at different proficiency levels and developed pupils' digital skills, including programming.",
+          "Created learning materials, assessed pupils and supported their progress; took part in school projects.",
         ],
         sk: [
-          "Výučba anglického jazyka na rôznych úrovniach jazykových zručností.",
-          "Rozvoj digitálnych kompetencií žiakov vrátane programovania.",
-          "Tvorba učebných pomôcok a materiálov, hodnotenie a podpora napredovania žiakov.",
+          "Výučba anglického jazyka na rôznych úrovniach a rozvoj digitálnych zručností žiakov vrátane programovania.",
+          "Tvorba učebných materiálov, hodnotenie žiakov a podpora ich napredovania, účasť na školských projektoch.",
         ],
         hu: [
-          "Angol nyelvet tanítottam különböző nyelvi szinteken.",
-          "Fejlesztettem a diákok digitális kompetenciáit, a programozást is beleértve.",
-          "Taneszközöket és tananyagokat készítettem, értékeltem a diákokat és támogattam a fejlődésüket.",
+          "Angol nyelvet tanítottam különböző szinteken, és fejlesztettem a diákok digitális készségeit, a programozást is beleértve.",
+          "Tananyagokat készítettem, értékeltem a diákokat és támogattam a fejlődésüket, részt vettem iskolai projektekben.",
         ],
+      },
+    },
+  ],
+
+  // icon: leader | digital | teaching · short: the label inside the Venn diagram
+  strengths: [
+    {
+      icon: "leader",
+      short: { en: "Leadership", sk: "Líderstvo", hu: "Vezetés" },
+      title: { en: "Leadership", sk: "Líderstvo", hu: "Vezetés" },
+      items: {
+        en: ["Strategic and day-to-day school management", "Budget and resource planning", "Staff leadership and professional development", "Parent and community relations", "School documentation and internal rules"],
+        sk: ["Strategické a každodenné riadenie školy", "Plánovanie rozpočtu a zdrojov", "Vedenie a profesijný rozvoj zamestnancov", "Spolupráca s rodičmi a komunitou", "Školská dokumentácia a vnútorné predpisy"],
+        hu: ["Stratégiai és napi iskolairányítás", "Költségvetés- és erőforrás-tervezés", "A tantestület vezetése és szakmai fejlesztése", "Kapcsolattartás a szülőkkel és a közösséggel", "Iskolai dokumentáció és belső szabályzatok"],
+      },
+    },
+    {
+      icon: "digital",
+      short: { en: "Digitalisation", sk: "Digitalizácia", hu: "Digitalizáció" },
+      title: { en: "Digitalisation of education", sk: "Digitalizácia vzdelávania", hu: "Az oktatás digitalizációja" },
+      items: {
+        en: ["Digital transformation of schools", "E-learning platforms", "School IT systems and networks (CCNA)", "Digital-skills training for teachers"],
+        sk: ["Digitálna transformácia školy", "E-learningové platformy", "Školské IT systémy a siete (CCNA)", "Školenia digitálnych zručností pre učiteľov"],
+        hu: ["Az iskola digitális átalakítása", "E-learning platformok", "Iskolai informatikai rendszerek és hálózatok (CCNA)", "Digitáliskészség-képzés pedagógusoknak"],
+      },
+    },
+    {
+      icon: "teaching",
+      short: { en: "Teaching", sk: "Pedagogika", hu: "Pedagógia" },
+      title: { en: "Teaching", sk: "Pedagogika", hu: "Pedagógia" },
+      items: {
+        en: ["English language teaching", "Informatics, programming and algorithms", "Curriculum and learning-material design", "Assessment and individual feedback"],
+        sk: ["Výučba anglického jazyka", "Informatika, programovanie a algoritmy", "Tvorba vzdelávacích programov a materiálov", "Hodnotenie a individuálna spätná väzba"],
+        hu: ["Angolnyelv-oktatás", "Informatika, programozás és algoritmusok", "Tanterv- és tananyagfejlesztés", "Értékelés és egyéni visszajelzés"],
       },
     },
   ],

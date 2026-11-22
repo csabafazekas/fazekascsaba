@@ -19,9 +19,9 @@
       langName: "English",
       nav: { about: "About", experience: "Experience", skills: "Strengths", education: "Education", contact: "Contact" },
       headings: {
-        experience: "Classroom, technology and team",
+        experience: "From the teacher's desk to the digital school",
         path: "Career path",
-        pathHint: "Select a bar to see the details",
+        pathHint: "Select a step to see the details",
         skills: "Where technology, teaching and leadership meet",
         skillsHint: "Hover over or select an area",
         education: "Always learning",
@@ -49,9 +49,9 @@
       langName: "Slovenčina",
       nav: { about: "O mne", experience: "Skúsenosti", skills: "Silné stránky", education: "Vzdelanie", contact: "Kontakt" },
       headings: {
-        experience: "Trieda, technológie a tím",
+        experience: "Od katedry k digitálnej škole",
         path: "Kariérna cesta",
-        pathHint: "Kliknite na pruh a zobrazí sa detail",
+        pathHint: "Kliknite na krok a zobrazí sa detail",
         skills: "Kde sa stretávajú technológie, pedagogika a líderstvo",
         skillsHint: "Prejdite myšou alebo kliknite na oblasť",
         education: "Neustále sa vzdelávam",
@@ -80,9 +80,9 @@
       langName: "Magyar",
       nav: { about: "Rólam", experience: "Tapasztalat", skills: "Erősségek", education: "Végzettség", contact: "Kapcsolat" },
       headings: {
-        experience: "Osztályterem, technológia és csapat",
+        experience: "A katedrától a digitális iskoláig",
         path: "Szakmai út",
-        pathHint: "Kattintson egy sávra a részletekért",
+        pathHint: "Kattintson egy lépésre a részletekért",
         skills: "Ahol a technológia, a pedagógia és a vezetés találkozik",
         skillsHint: "Vigye az egeret egy területre, vagy kattintson rá",
         education: "Folyamatosan tanulok",
@@ -217,8 +217,8 @@
   /* --------------------------------------------------------------- sections */
   const SECTIONS = [
     ["about", () => true],
-    ["skills", () => (DATA.strengths || []).length],
     ["experience", () => (DATA.experience || []).length],
+    ["skills", () => (DATA.strengths || []).length],
     ["education", () => (DATA.education || []).length || (DATA.qualifications || []).length || (DATA.languages || []).length],
     ["contact", () => !!DATA.profile.email],
   ];
@@ -292,55 +292,27 @@
   }
 
   /* ----------------------------------------------------------- experience */
-  const areaClass = (id) => (id ? ` area-${esc(id)}` : "");
-  const yearFrac = (v) => { const d = parseYM(v); return d.getFullYear() + d.getMonth() / 12; };
-  const endFrac = (v) => yearFrac(v) + 1 / 12; // a role ending in June covers June
-
-  function renderPath(items) {
-    const min = Math.floor(Math.min(...items.map((x) => yearFrac(x.start))));
-    const max = Math.floor(Math.max(...items.map((x) => endFrac(x.end)))) + 1;
-    const span = Math.max(1, max - min);
-    const pct = (v) => ((v - min) / span) * 100;
-    const step = span > 10 ? 2 : 1;
-    const ticks = [];
-    for (let y = min; y < max; y += step) ticks.push(y);
+  function renderExperience(n) {
+    const items = DATA.experience || [];
     const ordered = items.map((x, i) => ({ x, i })).sort((a, b) => String(a.x.start).localeCompare(String(b.x.start)));
-    const used = new Set(items.map((x) => x.area).filter(Boolean));
-    const legend = (DATA.strengths || []).filter((g) => used.has(g.id))
-      .map((g) => `<li class="${areaClass(g.id).trim()}"><span class="lg-dot" aria-hidden="true"></span>${esc(t(g.short || g.title))}</li>`).join("");
-    const rows = ordered.map(({ x, i }, k) => {
-      const l = pct(yearFrac(x.start));
-      const w = Math.max(pct(endFrac(x.end)) - l, 1.2);
-      const years = `${String(x.start).slice(0, 4)} – ${x.end === "present" ? S("present") : String(x.end).slice(0, 4)}`;
-      return `<li class="g-row${areaClass(x.area)}${l > 50 ? " is-end" : ""}${x.end === "present" ? " is-current" : ""}" style="--l:${l.toFixed(2)}%;--w:${w.toFixed(2)}%;--k:${k}">
-        <button type="button" class="g-btn" data-action="goto-role" data-index="${i}">
-          <span class="g-label"><span class="g-role">${esc(t(x.short || x.role))}</span><span class="g-years">${esc(years)}</span></span>
-          <span class="g-bar" aria-hidden="true"></span>
+    const count = ordered.length;
+    const stairs = ordered.map(({ x, i }, k) => {
+      const h = count > 1 ? Math.round(34 + (k * 66) / (count - 1)) : 100;
+      const w = count > 1 ? Math.round(52 + (k * 48) / (count - 1)) : 100;
+      const mix = count > 1 ? Math.round(6 + (k * 22) / Math.max(1, count - 2)) : 20;
+      return `<li class="stair${x.end === "present" ? " is-current" : ""}" style="--h:${h}%;--w:${w}%;--k:${k};--mix:${Math.min(mix, 28)}%">
+        <button type="button" class="stair-btn" data-action="goto-role" data-index="${i}">
+          <span class="stair-year">${esc(String(x.start).slice(0, 4))}</span>
+          <span class="stair-role">${esc(t(x.short || x.role))}</span>
         </button>
       </li>`;
     }).join("");
-    return `<div class="gantt-wrap reveal">
-        <div class="gantt-head">
-          <p class="mini-label">${esc(H("path"))}</p>
-          ${legend ? `<ul class="legend">${legend}</ul>` : ""}
-        </div>
-        <div class="gantt">
-          <div class="g-grid" aria-hidden="true">${ticks.map((y) => `<i style="--x:${pct(y).toFixed(2)}%"></i>`).join("")}</div>
-          <ol class="g-rows" aria-label="${esc(H("path"))}">${rows}</ol>
-          <div class="g-axis" aria-hidden="true">${ticks.map((y) => `<span style="--x:${pct(y).toFixed(2)}%">${y}</span>`).join("")}</div>
-        </div>
-        <p class="hint">${esc(H("pathHint"))}</p>
-      </div>`;
-  }
-
-  function renderExperience(n) {
-    const items = DATA.experience || [];
 
     const roles = items.map((x, i) => {
       const months = monthsBetween(x.start, x.end);
       const bullets = toArray(t(x.highlights));
       const isCurrent = x.end === "present";
-      return `<li class="role reveal${areaClass(x.area)}${isCurrent ? " is-current" : ""}" id="role-${i}">
+      return `<li class="role reveal${isCurrent ? " is-current" : ""}" id="role-${i}">
         <div class="role-when">
           <p class="role-dates">${range(x.start, x.end)}</p>
           <p class="role-dur">${esc(S("duration")(Math.floor(months / 12), months % 12))}</p>
@@ -355,7 +327,10 @@
 
     return `<section id="experience" class="section" aria-labelledby="experience-title">
       ${sectionHead("experience", n)}
-      ${items.length > 1 ? renderPath(items) : ""}
+      ${count > 1 ? `<div class="stairs-wrap reveal">
+        <div class="stairs-head"><p class="mini-label">${esc(H("path"))}</p><p class="hint">${esc(H("pathHint"))}</p></div>
+        <ol class="stairs" aria-label="${esc(H("path"))}">${stairs}</ol>
+      </div>` : ""}
       <ol class="roles">${roles}</ol>
     </section>`;
   }
@@ -371,7 +346,7 @@
     const venn = groups.length === 3
       ? `<div class="venn reveal">
           <svg viewBox="0 0 340 320" role="group" aria-label="${esc(H("skills"))}">
-            ${groups.map((g, i) => `<g class="venn-set set-${i + 1}${areaClass(g.id)}" data-set="${i}" data-action="pin-set" tabindex="0" role="button" aria-pressed="false" aria-label="${esc(t(g.title))}">
+            ${groups.map((g, i) => `<g class="venn-set set-${i + 1}" data-set="${i}" data-action="pin-set" tabindex="0" role="button" aria-pressed="false" aria-label="${esc(t(g.title))}">
               <circle cx="${VENN[i].cx}" cy="${VENN[i].cy}" r="100"/>
               <text x="${VENN[i].lx}" y="${VENN[i].ly}" text-anchor="middle">${esc(t(g.short || g.title))}</text>
             </g>`).join("")}
@@ -380,7 +355,7 @@
           <p class="hint">${esc(H("skillsHint"))}</p>
         </div>`
       : "";
-    const lists = groups.map((g, i) => `<div class="sgroup set-${i + 1}${areaClass(g.id)} reveal" data-set="${i}" data-action="pin-set">
+    const lists = groups.map((g, i) => `<div class="sgroup set-${i + 1} reveal" data-set="${i}" data-action="pin-set">
         <h3 class="sgroup-title"><span class="sgroup-icon">${icon(g.icon)}</span><span>${esc(t(g.title))}</span></h3>
         <ul class="chips">${toArray(t(g.items)).map((it) => `<li>${esc(it)}</li>`).join("")}</ul>
       </div>`).join("");
