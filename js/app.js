@@ -19,10 +19,10 @@
       langName: "English",
       nav: { about: "About", experience: "Experience", skills: "Strengths", education: "Education", contact: "Contact" },
       headings: {
-        experience: "From the classroom to school leadership",
+        experience: "Classroom, technology and team",
         path: "Career path",
-        pathHint: "Select a step to see the details",
-        skills: "Where leadership, technology and teaching meet",
+        pathHint: "Select a bar to see the details",
+        skills: "Where technology, teaching and leadership meet",
         skillsHint: "Hover over or select an area",
         education: "Always learning",
         languages: "Languages",
@@ -49,10 +49,10 @@
       langName: "Slovenčina",
       nav: { about: "O mne", experience: "Skúsenosti", skills: "Silné stránky", education: "Vzdelanie", contact: "Kontakt" },
       headings: {
-        experience: "Od katedry k vedeniu školy",
+        experience: "Trieda, technológie a tím",
         path: "Kariérna cesta",
-        pathHint: "Kliknite na krok a zobrazí sa detail",
-        skills: "Kde sa stretáva vedenie, technológie a pedagogika",
+        pathHint: "Kliknite na pruh a zobrazí sa detail",
+        skills: "Kde sa stretávajú technológie, pedagogika a líderstvo",
         skillsHint: "Prejdite myšou alebo kliknite na oblasť",
         education: "Neustále sa vzdelávam",
         languages: "Jazykové znalosti",
@@ -80,10 +80,10 @@
       langName: "Magyar",
       nav: { about: "Rólam", experience: "Tapasztalat", skills: "Erősségek", education: "Végzettség", contact: "Kapcsolat" },
       headings: {
-        experience: "A katedrától az iskolavezetésig",
+        experience: "Osztályterem, technológia és csapat",
         path: "Szakmai út",
-        pathHint: "Kattintson egy lépésre a részletekért",
-        skills: "Ahol a vezetés, a technológia és a pedagógia találkozik",
+        pathHint: "Kattintson egy sávra a részletekért",
+        skills: "Ahol a technológia, a pedagógia és a vezetés találkozik",
         skillsHint: "Vigye az egeret egy területre, vagy kattintson rá",
         education: "Folyamatosan tanulok",
         languages: "Nyelvtudás",
@@ -217,8 +217,8 @@
   /* --------------------------------------------------------------- sections */
   const SECTIONS = [
     ["about", () => true],
-    ["experience", () => (DATA.experience || []).length],
     ["skills", () => (DATA.strengths || []).length],
+    ["experience", () => (DATA.experience || []).length],
     ["education", () => (DATA.education || []).length || (DATA.qualifications || []).length || (DATA.languages || []).length],
     ["contact", () => !!DATA.profile.email],
   ];
@@ -292,27 +292,55 @@
   }
 
   /* ----------------------------------------------------------- experience */
-  function renderExperience(n) {
-    const items = DATA.experience || [];
+  const areaClass = (id) => (id ? ` area-${esc(id)}` : "");
+  const yearFrac = (v) => { const d = parseYM(v); return d.getFullYear() + d.getMonth() / 12; };
+  const endFrac = (v) => yearFrac(v) + 1 / 12; // a role ending in June covers June
+
+  function renderPath(items) {
+    const min = Math.floor(Math.min(...items.map((x) => yearFrac(x.start))));
+    const max = Math.floor(Math.max(...items.map((x) => endFrac(x.end)))) + 1;
+    const span = Math.max(1, max - min);
+    const pct = (v) => ((v - min) / span) * 100;
+    const step = span > 10 ? 2 : 1;
+    const ticks = [];
+    for (let y = min; y < max; y += step) ticks.push(y);
     const ordered = items.map((x, i) => ({ x, i })).sort((a, b) => String(a.x.start).localeCompare(String(b.x.start)));
-    const count = ordered.length;
-    const stairs = ordered.map(({ x, i }, k) => {
-      const h = count > 1 ? Math.round(34 + (k * 66) / (count - 1)) : 100;
-      const w = count > 1 ? Math.round(52 + (k * 48) / (count - 1)) : 100;
-      const mix = count > 1 ? Math.round(6 + (k * 22) / Math.max(1, count - 2)) : 20;
-      return `<li class="stair${x.end === "present" ? " is-current" : ""}" style="--h:${h}%;--w:${w}%;--k:${k};--mix:${Math.min(mix, 28)}%">
-        <button type="button" class="stair-btn" data-action="goto-role" data-index="${i}">
-          <span class="stair-year">${esc(String(x.start).slice(0, 4))}</span>
-          <span class="stair-role">${esc(t(x.short || x.role))}</span>
+    const used = new Set(items.map((x) => x.area).filter(Boolean));
+    const legend = (DATA.strengths || []).filter((g) => used.has(g.id))
+      .map((g) => `<li class="${areaClass(g.id).trim()}"><span class="lg-dot" aria-hidden="true"></span>${esc(t(g.short || g.title))}</li>`).join("");
+    const rows = ordered.map(({ x, i }, k) => {
+      const l = pct(yearFrac(x.start));
+      const w = Math.max(pct(endFrac(x.end)) - l, 1.2);
+      const years = `${String(x.start).slice(0, 4)} – ${x.end === "present" ? S("present") : String(x.end).slice(0, 4)}`;
+      return `<li class="g-row${areaClass(x.area)}${l > 50 ? " is-end" : ""}${x.end === "present" ? " is-current" : ""}" style="--l:${l.toFixed(2)}%;--w:${w.toFixed(2)}%;--k:${k}">
+        <button type="button" class="g-btn" data-action="goto-role" data-index="${i}">
+          <span class="g-label"><span class="g-role">${esc(t(x.short || x.role))}</span><span class="g-years">${esc(years)}</span></span>
+          <span class="g-bar" aria-hidden="true"></span>
         </button>
       </li>`;
     }).join("");
+    return `<div class="gantt-wrap reveal">
+        <div class="gantt-head">
+          <p class="mini-label">${esc(H("path"))}</p>
+          ${legend ? `<ul class="legend">${legend}</ul>` : ""}
+        </div>
+        <div class="gantt">
+          <div class="g-grid" aria-hidden="true">${ticks.map((y) => `<i style="--x:${pct(y).toFixed(2)}%"></i>`).join("")}</div>
+          <ol class="g-rows" aria-label="${esc(H("path"))}">${rows}</ol>
+          <div class="g-axis" aria-hidden="true">${ticks.map((y) => `<span style="--x:${pct(y).toFixed(2)}%">${y}</span>`).join("")}</div>
+        </div>
+        <p class="hint">${esc(H("pathHint"))}</p>
+      </div>`;
+  }
+
+  function renderExperience(n) {
+    const items = DATA.experience || [];
 
     const roles = items.map((x, i) => {
       const months = monthsBetween(x.start, x.end);
       const bullets = toArray(t(x.highlights));
       const isCurrent = x.end === "present";
-      return `<li class="role reveal${isCurrent ? " is-current" : ""}" id="role-${i}">
+      return `<li class="role reveal${areaClass(x.area)}${isCurrent ? " is-current" : ""}" id="role-${i}">
         <div class="role-when">
           <p class="role-dates">${range(x.start, x.end)}</p>
           <p class="role-dur">${esc(S("duration")(Math.floor(months / 12), months % 12))}</p>
@@ -327,35 +355,32 @@
 
     return `<section id="experience" class="section" aria-labelledby="experience-title">
       ${sectionHead("experience", n)}
-      ${count > 1 ? `<div class="stairs-wrap reveal">
-        <div class="stairs-head"><p class="mini-label">${esc(H("path"))}</p><p class="hint">${esc(H("pathHint"))}</p></div>
-        <ol class="stairs" aria-label="${esc(H("path"))}">${stairs}</ol>
-      </div>` : ""}
+      ${items.length > 1 ? renderPath(items) : ""}
       <ol class="roles">${roles}</ol>
     </section>`;
   }
 
   /* ------------------------------------------------------------ strengths */
   const VENN = [
-    { cx: 120, cy: 120, lx: 76, ly: 104 },
-    { cx: 220, cy: 120, lx: 264, ly: 104 },
-    { cx: 170, cy: 205, lx: 170, ly: 266 },
+    { cx: 110, cy: 118, lx: 68, ly: 100 },
+    { cx: 230, cy: 118, lx: 272, ly: 100 },
+    { cx: 170, cy: 212, lx: 170, ly: 274 },
   ];
   function renderStrengths(n) {
     const groups = (DATA.strengths || []).slice(0, 3);
     const venn = groups.length === 3
       ? `<div class="venn reveal">
           <svg viewBox="0 0 340 320" role="group" aria-label="${esc(H("skills"))}">
-            ${groups.map((g, i) => `<g class="venn-set set-${i + 1}" data-set="${i}" data-action="pin-set" tabindex="0" role="button" aria-pressed="false" aria-label="${esc(t(g.title))}">
+            ${groups.map((g, i) => `<g class="venn-set set-${i + 1}${areaClass(g.id)}" data-set="${i}" data-action="pin-set" tabindex="0" role="button" aria-pressed="false" aria-label="${esc(t(g.title))}">
               <circle cx="${VENN[i].cx}" cy="${VENN[i].cy}" r="100"/>
               <text x="${VENN[i].lx}" y="${VENN[i].ly}" text-anchor="middle">${esc(t(g.short || g.title))}</text>
             </g>`).join("")}
-            <text class="venn-center" x="170" y="156" text-anchor="middle">${esc(DATA.profile.firstName)}</text>
+            <text class="venn-center" x="170" y="158" text-anchor="middle">${esc(DATA.profile.firstName)}</text>
           </svg>
           <p class="hint">${esc(H("skillsHint"))}</p>
         </div>`
       : "";
-    const lists = groups.map((g, i) => `<div class="sgroup set-${i + 1} reveal" data-set="${i}" data-action="pin-set">
+    const lists = groups.map((g, i) => `<div class="sgroup set-${i + 1}${areaClass(g.id)} reveal" data-set="${i}" data-action="pin-set">
         <h3 class="sgroup-title"><span class="sgroup-icon">${icon(g.icon)}</span><span>${esc(t(g.title))}</span></h3>
         <ul class="chips">${toArray(t(g.items)).map((it) => `<li>${esc(it)}</li>`).join("")}</ul>
       </div>`).join("");

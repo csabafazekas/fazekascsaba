@@ -8,9 +8,9 @@ Personal CV website: a single page in **English, Slovak and Hungarian**. It is p
 ## What's on the page
 
 - **Hero:** name, role (with a highlighter effect), a short summary, contact details and a tilted monogram card with four floating key facts.
-- **Career stairs:** the progression from teacher to principal drawn as rising steps; select a step to jump to that role.
+- **Career-path chart:** every role as a bar on a year axis, coloured by pillar (digitalisation · teaching · leadership); select a bar to jump to that role.
 - **Experience timeline** that fills in as you scroll, with 2–3 key points per role.
-- **Strengths Venn diagram:** where leadership, digital education and teaching overlap; hover or select an area to highlight it.
+- **Strengths Venn diagram** (shown first): where digitalisation, teaching and leadership overlap; hover or select an area to highlight it.
 - **Learning path** (degrees, attestations, courses) and **language rings**.
 - **Contact band** with one-click email copy and a "Save contact" vCard.
 - **EN / SK / HU switch.** The page opens in the visitor's browser language, and `?lang=sk` / `?lang=hu` links open a specific language. Hungarian uses Hungarian name order and place names (Fazekas Csaba, Fülek).
@@ -20,7 +20,7 @@ Personal CV website: a single page in **English, Slovak and Hungarian**. It is p
 
 All text lives in [`js/cv-data.js`](js/cv-data.js). Each text is either a plain string or `{ en: "…", sk: "…", hu: "…" }`.
 
-- **New role:** add it to the top of `experience` (dates as `"YYYY-MM"`, `"present"` for the current one). The career path, durations and "years in education" update automatically.
+- **New role:** add it to the top of `experience` (dates as `"YYYY-MM"`, `"present"` for the current one, `area` = `digital`, `teaching` or `leadership`). The career-path chart, durations and "years in education" update automatically.
 - **Photo:** add e.g. `assets/photo.jpg` and set `profile.photo: "assets/photo.jpg"`.
 - **Phone / LinkedIn:** fill in `profile.phone` or un-comment the LinkedIn line in `profile.socials`.
 - **Colours:** change `--accent` (and its dark-mode twin) in `css/style.css`.
