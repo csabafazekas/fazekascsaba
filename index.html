@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Csaba Fazekas · CV</title>
+  <meta name="description" content="Personal CV and portfolio of Csaba Fazekas.">
+  <meta name="theme-color" content="#f6f5f1">
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Csaba Fazekas · CV">
+  <meta property="og:description" content="Personal CV and portfolio of Csaba Fazekas.">
+
+  <!-- Apply the saved / system theme before first paint to avoid a flash. -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("cv-theme");
+        if (t !== "light" && t !== "dark") {
+          t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) { /* storage blocked: CSS falls back to the system preference */ }
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400..600&family=Plus+Jakarta+Sans:wght@400..800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+  <div class="sample-banner" id="sample-banner" hidden></div>
+  <header class="mobile-bar" id="mobile-bar"></header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main id="main" tabindex="-1"></main>
+  </div>
+
+  <div class="filter-pill" id="filter-pill" role="status" hidden></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <button type="button" class="back-to-top" id="back-to-top" data-action="top" aria-label="Back to top"></button>
+  <dialog class="modal" id="project-modal"></dialog>
+
+  <noscript>
+    <p class="noscript">This CV is interactive and needs JavaScript to display. Please enable JavaScript and reload the page.</p>
+  </noscript>
+
+  <script src="js/cv-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
