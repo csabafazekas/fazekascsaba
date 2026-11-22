@@ -2,6 +2,8 @@
 
 An interactive, single-page CV. It is plain HTML, CSS and JavaScript with no build step, so it works on GitHub Pages as is.
 
+**Live site:** https://csabafazekas.github.io/fazekascsaba/
+
 ## Features
 
 - **One data file.** Every bit of text lives in [`js/cv-data.js`](js/cv-data.js). Edit that file and the whole page updates.
