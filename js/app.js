@@ -262,11 +262,11 @@
       p.location && `<li>${icon("pin")}<span>${esc(t(p.location))}</span></li>`,
       ...(p.socials || []).map((s) => `<li>${icon(s.type)}<a href="${esc(s.url)}" ${ext}>${esc(prettyUrl(s.url))}</a></li>`),
     ].filter(Boolean).join("");
-    const chips = (DATA.highlights || []).slice(0, 4).map((h, i) => {
+    const chips = (DATA.highlights || []).slice(0, 5).map((h, i) => {
       const value = h.auto === "years" ? `${yearsInField()}${h.suffix || ""}` : `${t(h.value)}${h.suffix || ""}`;
       return `<li class="float-chip fc-${i + 1}">
         <span class="fc-icon">${icon(h.icon || "star")}</span>
-        <span class="fc-text"><span class="fc-value">${esc(value)}</span><span class="fc-label">${esc(t(h.label))}</span></span>
+        <span class="fc-text"><span class="fc-value">${esc(value)}</span>${h.label ? `<span class="fc-label">${esc(t(h.label))}</span>` : ""}</span>
       </li>`;
     }).join("");
     return `<section id="about" class="hero" aria-labelledby="about-title">

@@ -53,14 +53,18 @@ window.CV_DATA = {
     },
   },
 
-  // The four key facts shown around the monogram card. auto: "years" is calculated for you.
-  // icon: clock | digital | star | languages | cap
+  // Up to five key facts shown around the monogram card (label is optional). auto: "years" is calculated for you.
+  // icon: clock | digital | leader | star | languages | cap
   highlights: [
     { icon: "clock", auto: "years", suffix: "+", label: { en: "years in education", sk: "rokov v školstve", hu: "év az oktatásban" } },
     {
       icon: "digital",
       value: { en: "Digital coordinator", sk: "Digitálny koordinátor", hu: "Digitális koordinátor" },
-      label: "2021 – 2024",
+    },
+    {
+      icon: "leader",
+      value: { en: "School leadership", sk: "Vedenie školy", hu: "Iskolavezetés" },
+      label: { en: "since 2024", sk: "od roku 2024", hu: "2024 óta" },
     },
     {
       icon: "languages",

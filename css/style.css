@@ -399,7 +399,7 @@ code { font-family: var(--font-mono); font-size: 0.92em; }
 .anim .hero-copy > :nth-child(6) { transition-delay: 0.3s; }
 
 /* monogram card with floating facts */
-.hero-visual { position: relative; height: 440px; }
+.hero-visual { position: relative; height: 500px; }
 .portrait {
   position: absolute;
   left: 50%; top: 50%;
@@ -433,7 +433,7 @@ code { font-family: var(--font-mono); font-size: 0.92em; }
 .portrait-initials {
   position: relative;
   font-family: var(--font-display);
-  font-size: 118px;
+  font-size: 104px;
   font-weight: 600;
   line-height: 1;
   letter-spacing: -0.04em;
@@ -460,10 +460,12 @@ code { font-family: var(--font-mono); font-size: 0.92em; }
   transition: opacity 0.6s var(--ease), scale 0.6s var(--ease);
 }
 .anim .hero:not(.is-visible) .float-chip { opacity: 0; scale: 0.85; }
-.fc-1 { top: 18px; left: 0; transition-delay: 0.45s; }
-.fc-2 { top: 86px; right: -6px; animation-delay: -1.8s; transition-delay: 0.6s; }
-.fc-3 { bottom: 70px; left: -12px; animation-delay: -3.6s; transition-delay: 0.75s; }
-.fc-4 { bottom: 6px; right: 22px; animation-delay: -5.2s; transition-delay: 0.9s; }
+/* alternate left / right and keep clear of the monogram in the middle */
+.fc-1 { top: 0; left: 0; transition-delay: 0.45s; }
+.fc-2 { top: 72px; right: -8px; animation-delay: -1.4s; transition-delay: 0.58s; }
+.fc-3 { top: 142px; left: -12px; animation-delay: -2.8s; transition-delay: 0.71s; }
+.fc-4 { top: 310px; right: -12px; animation-delay: -4.2s; transition-delay: 0.84s; }
+.fc-5 { bottom: 0; left: 6px; animation-delay: -5.6s; transition-delay: 0.97s; }
 @keyframes float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -9px; } }
 .fc-icon { display: grid; place-items: center; width: 36px; height: 36px; flex: none; border-radius: 11px; background: var(--accent-soft); color: var(--accent); }
 .fc-icon .icon { width: 18px; height: 18px; }
@@ -810,7 +812,7 @@ code { font-family: var(--font-mono); font-size: 0.92em; }
 
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; gap: 20px; }
-  .hero-visual { width: 100%; max-width: 440px; height: 400px; margin: 0 auto; }
+  .hero-visual { width: 100%; max-width: 440px; height: 500px; margin: 0 auto; }
   .strengths-wrap { grid-template-columns: 1fr; gap: 28px; }
   .venn { max-width: 330px; margin: 0 auto; width: 100%; }
 }
@@ -847,18 +849,19 @@ code { font-family: var(--font-mono); font-size: 0.92em; }
   .summary p { font-size: 1.04rem; }
   .meta { flex-direction: column; gap: 8px; }
   .hero-actions .btn { flex: 1 1 100%; }
-  .hero-visual { height: 340px; }
+  .hero-visual { height: 444px; }
   .portrait { width: 200px; height: 245px; border-radius: 30px; }
-  .portrait-initials { font-size: 86px; }
+  .portrait-initials { font-size: 78px; }
   .float-chip { max-width: 158px; padding: 8px 10px 8px 8px; gap: 8px; border-radius: 13px; }
   .fc-icon { width: 30px; height: 30px; border-radius: 9px; }
   .fc-icon .icon { width: 15px; height: 15px; }
   .fc-value { font-size: 15px; }
   .fc-label { font-size: 11px; }
-  .fc-1 { top: 4px; left: 0; }
-  .fc-2 { top: 62px; right: 0; }
-  .fc-3 { bottom: 56px; left: 0; }
-  .fc-4 { bottom: 0; right: 6px; }
+  .fc-1 { top: 0; left: 0; }
+  .fc-2 { top: 52px; right: 0; }
+  .fc-3 { top: 112px; left: 0; }
+  .fc-4 { top: 274px; right: 0; }
+  .fc-5 { bottom: 0; left: 0; }
   .scroll-cue { display: none; }
   .rings { gap: 8px; }
   .ring-level { font-size: 12px; }
